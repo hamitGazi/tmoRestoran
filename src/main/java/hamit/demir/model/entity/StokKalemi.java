@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "stok_kalemleri")
+@Table(name = "stok_kalemleri",schema = "alakart")
 public class StokKalemi {
 
     @Id
@@ -38,9 +38,9 @@ public class StokKalemi {
      */
     private Boolean aktif;
 
-    @Column(name = "created_at", updatable = false)
+
     private LocalDateTime olusturmaTarih;
 
-    @Column(name = "updated_at")
+
     private LocalDateTime guncelleTarih;
 }

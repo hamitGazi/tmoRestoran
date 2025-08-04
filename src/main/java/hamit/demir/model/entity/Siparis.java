@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 @Data
 @Entity
-@Table(name = "siparisler")
+@Table(name = "siparisler",schema = "alakart")
 public class Siparis {
 
     @Id
@@ -40,7 +40,7 @@ public class Siparis {
     private SiparisDurumu durum;
 
     /*Sipariş Notu: Genel bir sipariş notu (örneğin, "Hızlı hazırlansın") için bir not alanı eklenebilir.*/
-    @Column(name = "not")
+    @Column(name = "not",columnDefinition="TEXT")
     private String not;
 
 

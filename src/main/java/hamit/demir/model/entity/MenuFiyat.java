@@ -8,18 +8,17 @@ import java.time.LocalDateTime;
 
     @Data
     @Entity
-    @Table(name = "menu_fiyatlar")
+    @Table(name = "menu_fiyatlar",schema="alakart")
     public class MenuFiyat {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id")
         private Long id;
 
         /**
          * Fiyatın ait olduğu menü ürünü.
          */
         @ManyToOne(optional = false)
-        @JoinColumn(name = "menu_urun_id", nullable = false)
+        @JoinColumn(name = "menu_item_id", nullable = false)
         private MenuItem menuItem;
 
         /**
@@ -52,9 +51,9 @@ import java.time.LocalDateTime;
         @Column(name = "aktif", nullable = false)
         private boolean aktif;
 
-        @Column(name = "created_at", updatable = false)
+
         private LocalDateTime olusturmaTarih;
 
-        @Column(name = "updated_at")
+
         private LocalDateTime guncelleTarih;
     }

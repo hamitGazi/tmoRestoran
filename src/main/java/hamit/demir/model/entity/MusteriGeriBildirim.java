@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name="musteri_geri_bildirimi")
+@Table(name="musteri_geri_bildirimi",schema = "alakart")
 public class MusteriGeriBildirim {
 
     @Id
@@ -21,7 +21,6 @@ public class MusteriGeriBildirim {
      */
     @ManyToOne
     private Siparis siparis;
-
     /**
      * 1–5 arası puan.
      */
@@ -29,11 +28,10 @@ public class MusteriGeriBildirim {
     @Max(5)
     @Column(name = "puan", nullable = false)
     private int puan;
-
     /**
      * Müşterinin yorum metni.
      */
-    @Column(name = "yorum")
+    @Column(name = "yorum",columnDefinition = "TEXT",nullable = false)
     private String yorum;
     @Column(name = "musteri_adi")
     private String musteriAdi;

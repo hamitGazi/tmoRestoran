@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "masalar", indexes = {@Index(name = "idx_masa_kod", columnList = "kod")})
+@Table(name = "masalar", schema = "alakart", indexes = {@Index(name = "idx_masa_kod", columnList = "kod")})
 public class Masa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class Masa {
     /**
      * QR kod ile eşleşen masa kodu (örnek: "A1").
      */
-    @Column(name = "Qr_kod_url", nullable = false, unique = true)
+    @Column(name = "qr_kod_url", nullable = false, unique = true)
     private String qrKodUrl;
 
     /**
@@ -32,8 +32,8 @@ public class Masa {
      * Masa şu anda dolu mu (müşteri oturuyor mu).
      */
     @Enumerated(EnumType.STRING)
-    @Column(name = "durum", nullable = false)
-    private MasaDurumu durum;
+    @Column(name = "masa_durum")
+    private MasaDurumu masaDurum;
 
     private LocalDateTime olusturmaTarih;
 

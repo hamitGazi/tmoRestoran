@@ -1,17 +1,20 @@
 package hamit.demir.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "musteriler")
+@Table(name = "musteriler",schema = "alakart")
 public class Musteri {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+
     private Long id;
 
     @Column(name = "ad")
@@ -22,8 +25,15 @@ public class Musteri {
     @Column(name = "telefon")
     private String telefon;
 
-    @Column(name = "email")
+    @Email(message = "Geçerli bir e-posta adresi giriniz") // E-posta formatını zorunlu kılar
+    @NotBlank(message = "E-posta alanı boş olamaz")
+    @Column(name = "musteri_adi", nullable = false, unique = true)
     private String email;
+
+    @NotBlank(message = "Şifre boş olamaz")
+    @Size(min = 6, message = "Şifre en az 6 karakter olmalıdır")
+    @Column(name = "sifre", nullable = false)
+    private String sifre;
 
     private LocalDateTime olusturmaTarih;
 

@@ -42,7 +42,7 @@ public class MenuItem {
     private String resimYolu;
 
     /*Ek Özellikler: Ürün için özel seçenekler (örneğin, "Acısız", "Ekstra Peynir") için bir ekOzellikler alanı veya tablosu eklenebilir.*/
-    @Column(name = "ek_ozellikler", columnDefinition = "jsonb")
+    @Column(name = "ek_ozellikler", columnDefinition = "text")
     private String ekOzellikler;
 
 /*    @Column(name = "indirim_fiyati")

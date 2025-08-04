@@ -7,11 +7,10 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name="menu_kategoriler")
+@Table(name="menu_kategoriler",schema = "alakart")
 public class MenuCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     /**
@@ -20,14 +19,14 @@ public class MenuCategory {
     @Column(name = "ad", nullable = false)
     private String ad;
 
-    @Column(name = "aciklama")
+    @Column(name = "aciklama",columnDefinition="TEXT")
     private String aciklama;
     /*Sıralama: sira alanı, menüde kategorilerin hangi sırayla gösterileceğini kontrol eder*/
-    @Column(name = "sira")
-    private Integer sira;
+    @Column(name = "menu_sira", nullable = false)
+    private Integer menuSira;
 
-    @Column(name = "aktif", nullable = false)
-    private boolean aktif = true;
+    @Column(name = "aktif_mi")
+    private Boolean aktif ;
 
     private LocalDateTime olusturmaTarih;
 

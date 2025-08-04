@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name="personeller",indexes = {@Index(name="idx_personel_kullaniciAdi",columnList = "kullaniciAdi")})
+@Table(name="personeller",schema="alakart",indexes = {@Index(name="idx_personel_kullaniciAdi",columnList = "kullaniciAdi")})
 public class Personel {
 
     @Id
@@ -49,7 +49,7 @@ public class Personel {
     private PersonelRol rol;
 
     @Column(name = "aktif", nullable = false)
-    private boolean aktif = true;
+    private boolean aktif ;
 
     private LocalDateTime olusturTarih;
 
