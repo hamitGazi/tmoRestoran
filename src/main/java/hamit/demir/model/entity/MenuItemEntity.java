@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "menu_urunler")
-public class MenuItem {
+@Table(name = "menu_urunler",schema = "alakart")
+public class MenuItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -27,7 +27,7 @@ public class MenuItem {
      * Ürünün ait olduğu menü kategorisi.
      */
     @ManyToOne
-    private MenuCategory kategori;
+    private MenuCategoryEntity kategori;
 
     /**
      * Ürün aktif mi (menüde gösterilsin mi).

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "siparis_kalemleri",schema = "alakart")
-public class SiparisKalemi {
+public class SiparisKalemiEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +16,13 @@ public class SiparisKalemi {
      * Hangi siparişe ait olduğu.
      */
     @ManyToOne
-    private Siparis siparis;
+    private SiparisEntity siparis;
 
     /**
      * Sipariş edilen ürün.
      */
     @ManyToOne
-    private MenuItem menuItem;
+    private MenuItemEntity menuItem;
 
     /**
      * Kaç adet istendiği.

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
     @Data
     @Entity
     @Table(name = "menu_fiyatlar",schema="alakart")
-    public class MenuFiyat {
+    public class MenuFiyatEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
          */
         @ManyToOne(optional = false)
         @JoinColumn(name = "menu_item_id", nullable = false)
-        private MenuItem menuItem;
+        private MenuItemEntity menuItem;
 
         /**
          * Ürünün fiyatı (örneğin: 59.90).

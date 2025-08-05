@@ -4,23 +4,21 @@ import hamit.demir.model.dto.enumlar.EnumRecord;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+
 import java.util.Arrays;
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public enum SiparisDurumu {
-    BEKLIYOR("Bekliyor"),
-    HAZIRLANIYOR("Hazırlanıyor"),
-    SERVIS_EDILDI("Servis Edildi"),
-    IPTAL_EDILDI("İptal Edildi"),
-    TAMAMLANDI("Tamamlandı");
+
+public enum OdemeYontemiEntity {
+    NAKIT("Nakit"),
+    KREDI_KARTI("Kredi Kartı"),
+    ONLINE("Online Ödeme");
 
     private final String label;
-
-    public static List<EnumRecord> siprisDurumEnumList() {
+    public static List<EnumRecord> oedmeYontemEnumList() {
         return Arrays.stream(Birim.values()).map(deger-> new EnumRecord(deger.name(),deger.getLabel())).toList();
     }
-
 
 }

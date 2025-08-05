@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "masalar", schema = "alakart", indexes = {@Index(name = "idx_masa_kod", columnList = "kod")})
-public class Masa {
+public class MasaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

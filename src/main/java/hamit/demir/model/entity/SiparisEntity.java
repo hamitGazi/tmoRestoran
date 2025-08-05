@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "siparisler",schema = "alakart")
-public class Siparis {
+public class SiparisEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +17,17 @@ public class Siparis {
      * Siparişin hangi masaya ait olduğu.
      */
     @ManyToOne
-    private Masa masa;
+    private MasaEntity masa;
 
     @Column(name = "musteri_adi")
-    private String musteriAdi;
+    private String musteriAd;
 
     @Column(name = "toplam_tutar")
     private Double toplamTutar;
 
     @ManyToOne
     @JoinColumn(name = "personel_id")
-    private Personel personel;
+    private PersonelEntity personel;
     /**
      * Siparişin oluşturulma zamanı.
      */
@@ -37,12 +37,10 @@ public class Siparis {
      * Siparişin güncel durumu.
      */
     @Enumerated(EnumType.STRING)
-    private SiparisDurumu durum;
+    private SiparisDurumu siparisDurumu;
 
     /*Sipariş Notu: Genel bir sipariş notu (örneğin, "Hızlı hazırlansın") için bir not alanı eklenebilir.*/
     @Column(name = "not",columnDefinition="TEXT")
     private String not;
-
-
 
 }

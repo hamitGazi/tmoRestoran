@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name="odemeler",schema = "alakart")
-public class Odeme {
+public class OdemeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,7 +16,7 @@ public class Odeme {
      */
 
     @OneToOne
-    private Siparis siparis;
+    private SiparisEntity siparis;
     /**
      * Ödenen toplam tutar.
      */
@@ -28,7 +28,7 @@ public class Odeme {
      */
 
     @Enumerated(EnumType.STRING)
-    private OdemeYontemi yontemi;
+    private OdemeYontemiEntity yontemi;
     /**
      * Ödeme zamanı.
      */
@@ -38,6 +38,6 @@ public class Odeme {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "durum", nullable = false)
-    private OdemeDurumu durum;
+    private OdemeDurumu odemeDurum;
 
 }

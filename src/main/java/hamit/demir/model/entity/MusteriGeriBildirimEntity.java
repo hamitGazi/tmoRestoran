@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name="musteri_geri_bildirimi",schema = "alakart")
-public class MusteriGeriBildirim {
+public class MusteriGeriBildirimEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class MusteriGeriBildirim {
      * Hangi siparişten sonra alındı.
      */
     @ManyToOne
-    private Siparis siparis;
+    private SiparisEntity siparis;
     /**
      * 1–5 arası puan.
      */
@@ -38,7 +38,6 @@ public class MusteriGeriBildirim {
 
     private LocalDateTime olusturmaTarih;
 
-    private LocalDateTime güncelleTarih;
-
+    private LocalDateTime guncelleTarih;
 
 }

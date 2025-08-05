@@ -8,51 +8,35 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Data
 @Entity
-@Table(name="personeller",schema="alakart",indexes = {@Index(name="idx_personel_kullaniciAdi",columnList = "kullaniciAdi")})
-public class Personel {
-
+@Data
+@Table(name = "musteriler",schema = "alakart")
+public class MusteriEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    /**
-     * Personelin adı-soyadı.
-     */
-    @Column(name = "ad", nullable = false)
+    @Column(name = "ad")
     private String ad;
-
-    @Column(name = "soyad", nullable = false)
+    @Column(name = "soyad")
     private String soyad;
 
-    /**
-     * Giriş için kullanıcı adı.
-     */
+    @Column(name = "telefon")
+    private String telefon;
+
     @Email(message = "Geçerli bir e-posta adresi giriniz") // E-posta formatını zorunlu kılar
     @NotBlank(message = "E-posta alanı boş olamaz")
-    @Column(name = "kullaniciAdi", nullable = false, unique = true)
+    @Column(name = "musteri_adi", nullable = false, unique = true)
     private String email;
 
-    /**
-     * Şifre (hash'lenmiş olarak tutulmalı).
-     */
     @NotBlank(message = "Şifre boş olamaz")
     @Size(min = 6, message = "Şifre en az 6 karakter olmalıdır")
     @Column(name = "sifre", nullable = false)
     private String sifre;
 
-    /**
-     * Personelin görev rolü.
-     */
-    @Enumerated(EnumType.STRING)
-    private PersonelRol rol;
-
-    @Column(name = "aktif", nullable = false)
-    private boolean aktif ;
-
-    private LocalDateTime olusturTarih;
-
+    private LocalDateTime olusturmaTarih;
 
     private LocalDateTime guncelleTarih;
+
 }
