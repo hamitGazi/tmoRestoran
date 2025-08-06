@@ -28,7 +28,7 @@ public class OdemeEntity {
      */
 
     @Enumerated(EnumType.STRING)
-    private OdemeYontemiEntity yontemi;
+    private OdemeYontem yontemi;
     /**
      * Ödeme zamanı.
      */

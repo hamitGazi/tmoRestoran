@@ -1,6 +1,7 @@
 package hamit.demir.model.entity;
 
 import hamit.demir.model.dto.enumlar.EnumRecord;
+import hamit.demir.utils.GenericRespose;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -17,8 +18,9 @@ public enum MasaDurumu {
 
     private final String label;
 
-    public static List<EnumRecord> masaDurumEnumList() {
-        return Arrays.stream(Birim.values()).map(deger -> new EnumRecord(deger.name(), deger.getLabel())).toList();
+    public static GenericRespose<List<EnumRecord>> masaDurumEnumList() {
+        List<EnumRecord> list = Arrays.stream(Birim.values()).map(deger -> new EnumRecord(deger.name(), deger.getLabel())).toList();
+   return GenericRespose.ok(list);
     }
 
 }
