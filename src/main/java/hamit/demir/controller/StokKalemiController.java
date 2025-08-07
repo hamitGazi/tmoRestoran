@@ -9,6 +9,7 @@ import hamit.demir.model.dto.StokKalemi.StokKalemiUpdateRequest;
 import hamit.demir.model.dto.enumlar.EnumRecord;
 import hamit.demir.model.entity.Birim;
 import hamit.demir.service.stokKalemi.StokKalemService;
+import hamit.demir.utils.GenericRespose;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,29 +23,36 @@ public class StokKalemiController {
 
     private final StokKalemService stokKalemService;
     @GetMapping("birim-enum")
-    public List<EnumRecord> getAllBirimEnum() {
-        return Birim.birimEnumList();
+    public GenericRespose<List<EnumRecord>> getAllBirimEnum() {
+        List<EnumRecord> enumRecords = Birim.birimEnumList();
+        return GenericRespose.ok(enumRecords);
     }
 
-    @GetMapping
-    public List<StokKalemiResponse> getAllStokKalemler() {
-        return stokKalemService.getAllStokKalemler();
+    @GetMapping("all")
+    public GenericRespose<List<StokKalemiResponse>> getAllStokKalemler() {
+
+        List<StokKalemiResponse> allStokKalemler = stokKalemService.getAllStokKalemler();
+        return GenericRespose.ok(allStokKalemler);
     }
 
     @GetMapping("/{id}")
-    public StokKalemiResponse getStokKalemById(@PathVariable Long id) {
-        return stokKalemService.getStokKalemById(id);
+    public GenericRespose<StokKalemiResponse> getStokKalemById(@PathVariable Long id) {
+
+        StokKalemiResponse stokKalemById = stokKalemService.getStokKalemById(id);
+        return GenericRespose.ok(stokKalemById);
     }
 
-    @PostMapping
-    public Long saveStokKalem(@Valid @RequestBody StokKalemiSaveRequest request) {
-        return stokKalemService.saveStokKalem(request);
+    @PostMapping("save")
+    public GenericRespose<Long> saveStokKalem(@Valid @RequestBody StokKalemiSaveRequest request) {
+        Long id = stokKalemService.saveStokKalem(request);
+        return GenericRespose.ok(id);
     }
 
-    @PutMapping
-    public Long updateStokKalem(@Valid @RequestBody StokKalemiUpdateRequest request) {
+    @PutMapping("update")
+    public GenericRespose<Long> updateStokKalem(@Valid @RequestBody StokKalemiUpdateRequest request) {
 
-        return stokKalemService.updateStokKalem(request);
+        Long id = stokKalemService.updateStokKalem(request);
+        return GenericRespose.ok(id);
     }
 
 

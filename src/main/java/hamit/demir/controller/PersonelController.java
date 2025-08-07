@@ -10,6 +10,7 @@ import hamit.demir.model.dto.personel.PersonelUpdateRequest;
 import hamit.demir.model.entity.PersonelRol;
 import hamit.demir.service.MasaService;
 import hamit.demir.service.personel.PersonelService;
+import hamit.demir.utils.GenericRespose;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +25,16 @@ public class PersonelController {
     private final PersonelService personelServicee;
 
     @GetMapping("rol-enum")
-    public List<EnumRecord> getAllRolEnum() {
-        return PersonelRol.personelRolEnumList();
+    public GenericRespose<List<EnumRecord>> getAllRolEnum() {
+
+        List<EnumRecord> enumRecords = PersonelRol.personelRolEnumList();
+        return GenericRespose.ok(enumRecords);
     }
 
-    @GetMapping
-    public List<PersonelResponse> getAllPersonel() {
-        return personelServicee.getAllPersonel();
+    @GetMapping("all")
+    public GenericRespose<List<PersonelResponse>> getAllPersonel() {
+        List<PersonelResponse> allPersonel = personelServicee.getAllPersonel();
+        return GenericRespose.ok(allPersonel);
     }
 
     @GetMapping("/{id}")
@@ -38,15 +42,18 @@ public class PersonelController {
         return personelServicee.getPersonelById(id);
     }
 
-    @PostMapping
-    public Long savePersonel(@Valid @RequestBody PersonelSaveRequest request) {
-        return personelServicee.savePersonel(request);
+    @PostMapping("save")
+    public  GenericRespose<Long> savePersonel(@Valid @RequestBody PersonelSaveRequest request) {
+
+        Long id = personelServicee.savePersonel(request);
+        return GenericRespose.ok(id);
     }
 
     @PutMapping
-    public Long updatePersonel(@Valid @RequestBody PersonelUpdateRequest request) {
+    public GenericRespose<Long> updatePersonel(@Valid @RequestBody PersonelUpdateRequest request) {
 
-        return personelServicee.updatePersonel(request);
+        Long id = personelServicee.updatePersonel(request);
+        return GenericRespose.ok(id);
     }
 
     @DeleteMapping("/{id}")

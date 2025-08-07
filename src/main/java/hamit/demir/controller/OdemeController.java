@@ -6,6 +6,7 @@ import hamit.demir.model.dto.odeme.OdemeSaveRequest;
 import hamit.demir.model.dto.odeme.OdemeUpdateRequest;
 import hamit.demir.model.entity.OdemeYontem;
 import hamit.demir.service.odeme.OdemeService;
+import hamit.demir.utils.GenericRespose;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -20,30 +21,39 @@ public class OdemeController {
     private final OdemeService odemeService;
 
     @GetMapping("yontem-enum")
-    public List<EnumRecord> getYontemEnum() {
-        return OdemeYontem.oedmeYontemEnumList();
+    public GenericRespose<List<EnumRecord>> getYontemEnum() {
+
+        List<EnumRecord> enumRecords = OdemeYontem.oedmeYontemEnumList();
+        return GenericRespose.ok(enumRecords);
     }
 
 
-    @GetMapping
-    public List<OdemeResponse> getAllOdemeler() {
-        return odemeService.getAllOdemeler();
+    @GetMapping("all")
+    public GenericRespose<List<OdemeResponse>> getAllOdemeler() {
+
+        List<OdemeResponse> allOdemeler = odemeService.getAllOdemeler();
+        return GenericRespose.ok(allOdemeler);
     }
 
     @GetMapping("/{id}")
-    public OdemeResponse getOdemeById(@PathVariable Long id) {
-        return odemeService.getOdemeById(id);
+    public GenericRespose<OdemeResponse> getOdemeById(@PathVariable Long id) {
+
+        OdemeResponse odemeById = odemeService.getOdemeById(id);
+        return GenericRespose.ok(odemeById);
     }
 
-    @PostMapping
-    public Long saveOdeme(@Valid @RequestBody OdemeSaveRequest request) {
-        return odemeService.saveOdeme(request);
+    @PostMapping("save")
+    public GenericRespose<Long> saveOdeme(@Valid @RequestBody OdemeSaveRequest request) {
+
+        Long id = odemeService.saveOdeme(request);
+        return GenericRespose.ok(id);
     }
 
-    @PutMapping
-    public Long updateOdeme(@Valid @RequestBody OdemeUpdateRequest request) {
+    @PutMapping("update")
+    public GenericRespose<Long> updateOdeme(@Valid @RequestBody OdemeUpdateRequest request) {
 
-        return odemeService.updateOdeme(request);
+        Long id = odemeService.updateOdeme(request);
+        return GenericRespose.ok(id);
     }
 
 

@@ -25,8 +25,7 @@ public class SiparisEntity {
     @Column(name = "toplam_tutar")
     private Double toplamTutar;
 
-    @ManyToOne
-    @JoinColumn(name = "personel_id")
+    @ManyToOne    @JoinColumn(name = "personel_id")
     private PersonelEntity personel;
     /**
      * Siparişin oluşturulma zamanı.

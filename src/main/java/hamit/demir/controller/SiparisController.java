@@ -6,6 +6,7 @@ import hamit.demir.model.dto.siparis.SiparisSaveRequest;
 import hamit.demir.model.dto.siparis.SiparisUpdateRequest;
 import hamit.demir.model.entity.SiparisDurumu;
 import hamit.demir.service.siparis.SiparisService;
+import hamit.demir.utils.GenericRespose;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,28 +20,32 @@ public class SiparisController {
 
     private final SiparisService siparisService;
     @GetMapping("durum-enum")
-    public List<EnumRecord> getAllDurumEnum() {
-        return SiparisDurumu.siprisDurumEnumList();
+    public GenericRespose<List<EnumRecord>> getAllDurumEnum() {
+
+        List<EnumRecord> enumRecords = SiparisDurumu.siprisDurumEnumList();
+        return GenericRespose.ok(enumRecords);
     }
 
-    @GetMapping
-    public List<SiparisResponse> getAllSiparisler() {
-        return siparisService.getAllSiparisler();
+    @GetMapping("all")
+    public GenericRespose<List<SiparisResponse>> getAllSiparisler() {
+        List<SiparisResponse> allSiparisler = siparisService.getAllSiparisler();
+        return GenericRespose.ok(allSiparisler);
     }
-
     @GetMapping("/{id}")
     public SiparisResponse getSiparis(@PathVariable Long id) {
         return siparisService.getSiparisById(id);
     }
-
-    @PostMapping
-    public Long saveSiparis(@Valid @RequestBody SiparisSaveRequest request) {
-        return siparisService.saveSiparis(request);
+    @PostMapping("save")
+    public GenericRespose<Long> saveSiparis(@Valid @RequestBody SiparisSaveRequest request) {
+        Long id = siparisService.saveSiparis(request);
+        return GenericRespose.ok(id);
     }
 
-    @PutMapping
-    public Long updateSiparis(@Valid @RequestBody SiparisUpdateRequest request) {
-        return siparisService.updateSiparis(request);
+    @PutMapping("update")
+    public GenericRespose<Long> updateSiparis(@Valid @RequestBody SiparisUpdateRequest request) {
+
+        Long id = siparisService.updateSiparis(request);
+        return GenericRespose.ok(id);
     }
 
     @DeleteMapping("/{id}")
