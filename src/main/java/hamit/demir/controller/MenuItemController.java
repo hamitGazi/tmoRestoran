@@ -8,41 +8,49 @@ import hamit.demir.model.dto.menuItem.MenuItemSaveRequest;
 import hamit.demir.model.dto.menuItem.MenuItemUpdateRequest;
 import hamit.demir.service.menuCategory.MenuCategoryService;
 import hamit.demir.service.menuItem.MenuItemService;
+import hamit.demir.utils.GenericRespose;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("menu-item")
 @RequiredArgsConstructor
 public class MenuItemController {
     private final MenuItemService menuItemService;
 
-    @GetMapping
-    public List<MenuItemResponse> getAllMenuItems() {
-        return menuItemService.getAllMenuItems();
+    @GetMapping("all")
+    public GenericRespose<List<MenuItemResponse>> getAllMenuItems() {
+        List<MenuItemResponse> allMenuItems = menuItemService.getAllMenuItems();
+        return GenericRespose.ok(allMenuItems);
     }
 
     @GetMapping("/{id}")
-    public MenuItemResponse getMenuItem(@PathVariable Long id) {
-        return menuItemService.getMenuItemById(id);
+    public GenericRespose<MenuItemResponse> getMenuItem(@PathVariable Long id) {
+        MenuItemResponse menuItemById = menuItemService.getMenuItemById(id);
+        return GenericRespose.ok(menuItemById);
     }
 
-    @PostMapping
-    public Long saveMenuItem(@Valid @RequestBody MenuItemSaveRequest request) {
-        return menuItemService.saveMenuItem(request);
+    @PostMapping("save")
+    public GenericRespose<Long> saveMenuItem(@Valid @RequestBody MenuItemSaveRequest request) {
+        Long id = menuItemService.saveMenuItem(request);
+        return GenericRespose.ok(id);
     }
 
-    @PutMapping
-    public Long updateMenuItem(@Valid @RequestBody MenuItemUpdateRequest request) {
-        return menuItemService.updateMenuItem(request);
+    @PutMapping("update")
+    public GenericRespose<Long> updateMenuItem(@Valid @RequestBody MenuItemUpdateRequest request) {
+        Long id = menuItemService.updateMenuItem(request);
+        return GenericRespose.ok(id);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteMenuItem(@PathVariable Long id) {
-        return menuItemService.deleteMenuItem(id);
+    public GenericRespose<String> deleteMenuItem(@PathVariable Long id) {
+        String str = menuItemService.deleteMenuItem(id);
+        return GenericRespose.ok(str);
+
+
     }
 
 

@@ -1,15 +1,16 @@
 package hamit.demir.model.dto.musteriGeriBildirim;
 
+import hamit.demir.model.entity.GeriBildirimTuruEnum;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public record MusteriGeriBildirimSaveRequest(
-        @NotNull Long siparisId,
+        String siparis,
         @Min(1) @Max(5) int puan,
-        @NotBlank String yorum,
-        String musteriAdi
+        String yorum,
+        String musteriAd,
+        GeriBildirimTuruEnum geriBildirimtur
+
 
 ) {
 }

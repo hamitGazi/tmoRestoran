@@ -9,7 +9,7 @@ public record MenuItemUpdateRequest(
         @NotBlank String ad,
         String aciklama,
         @NotNull Long kategoriId,
-        @NotNull Boolean aktif,
+        Boolean aktif,
         String resimYolu,
         String ekOzellikler
 ) {

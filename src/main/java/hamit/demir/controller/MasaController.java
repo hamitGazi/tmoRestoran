@@ -10,6 +10,7 @@ import hamit.demir.service.MasaService;
 import hamit.demir.utils.GenericRespose;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,29 +35,35 @@ public class MasaController {
     }
 
     @GetMapping("all")
-    public List<MasaResponse> getAllMasalar() {
-        return masaService.getAllMasalar();
+    public GenericRespose< List<MasaResponse>>getAllMasalar() {
+        List<MasaResponse> allMasalar = masaService.getAllMasalar();
+        return GenericRespose.ok(allMasalar);
     }
 
     @GetMapping("/{id}")
-    public MasaResponse getMasaById(@PathVariable Long id) {
-        return masaService.getMasaById(id);
+    public GenericRespose<MasaResponse> getMasaById(@PathVariable Long id) {
+        MasaResponse masaById = masaService.getMasaById(id);
+        return GenericRespose.ok(masaById);
     }
 
     @PostMapping("save")
-    public Long saveMasa(@Valid @RequestBody MasaSaveRequest request) {
-        return masaService.saveMasa(request);
+    public GenericRespose<Long> saveMasa(@Valid @RequestBody MasaSaveRequest request) {
+
+        Long id= masaService.saveMasa(request);
+        return GenericRespose.ok(id);
     }
 
     @PutMapping("update")
-    public Long updateMasa(@Valid @RequestBody MasaUpdateRequest request) {
+    public GenericRespose<Long> updateMasa(@Valid @RequestBody MasaUpdateRequest request) {
 
-        return masaService.updateMasa(request);
+        Long id = masaService.updateMasa(request);
+        return GenericRespose.ok(id);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteMasa(@PathVariable Long id) {
-        return masaService.deleteMasa(id);
+    public GenericRespose<String> deleteMasa(@PathVariable Long id) {
+        String str = masaService.deleteMasa(id);
+        return GenericRespose.ok(str);
     }
 
 

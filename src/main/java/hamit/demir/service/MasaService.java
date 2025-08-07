@@ -3,6 +3,7 @@ package hamit.demir.service;
 import hamit.demir.model.dto.masa.MasaResponse;
 import hamit.demir.model.dto.masa.MasaSaveRequest;
 import hamit.demir.model.dto.masa.MasaUpdateRequest;
+import hamit.demir.utils.GenericRespose;
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface MasaService {
 
     Long saveMasa( MasaSaveRequest request);
 
-    Long updateMasa(@Valid MasaUpdateRequest request);
+    Long updateMasa( MasaUpdateRequest request);
 
     String deleteMasa(Long id);
 }

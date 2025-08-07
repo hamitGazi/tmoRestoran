@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 public record MasaSaveRequest (
     @NotBlank String qrKodUrl,
     @NotNull Integer kapasite,
-    @NotNull MasaKonum masaKonum
+             MasaKonum masaKonum
 )
 {
 }

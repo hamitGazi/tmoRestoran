@@ -10,6 +10,7 @@ public record MusteriUpdateRequest(
         @NotBlank String ad,
         @NotBlank String soyad,
         String telefon,
-        @Email @NotBlank String email
+        @Email @NotBlank String email,
+          String adres
 ) {
 }

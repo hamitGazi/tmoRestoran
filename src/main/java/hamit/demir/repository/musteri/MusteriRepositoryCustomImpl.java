@@ -27,8 +27,8 @@ public class MusteriRepositoryCustomImpl extends QuerydslRepositorySupport imple
                 root.soyad,
                 root.telefon,
                 root.email,
+                root.adres,
                 root.olusturmaTarih
-           /*     root.guncelleTarih*/
                 )).fetch();
     }
 
@@ -42,8 +42,9 @@ public class MusteriRepositoryCustomImpl extends QuerydslRepositorySupport imple
                 root.soyad,
                 root.telefon,
                 root.email,
+                root.adres,
                 root.olusturmaTarih
-               /* root.guncelleTarih*/
+
         )).where(root.id.eq(id)).fetchOne();
     }
 }

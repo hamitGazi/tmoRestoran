@@ -1,50 +1,53 @@
 package hamit.demir.controller;
 
-import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.dto.masa.MasaSaveRequest;
-import hamit.demir.model.dto.masa.MasaUpdateRequest;
 import hamit.demir.model.dto.masaCategory.MenuCategoryResponse;
 import hamit.demir.model.dto.masaCategory.MenuCategorySaveRequest;
 import hamit.demir.model.dto.masaCategory.MenuCategoryUpdateRequest;
-import hamit.demir.repository.menuCategory.MenuCategoryRepository;
-import hamit.demir.service.MasaService;
 import hamit.demir.service.menuCategory.MenuCategoryService;
+import hamit.demir.utils.GenericRespose;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin()
 @RestController
 @RequestMapping("menu-category")
 @RequiredArgsConstructor
 public class MenuCategoryController {
+    private final MenuCategoryService menuCategoryService;
 
-     private final MenuCategoryService menuCategoryService;
-
-    @GetMapping
-    public List<MenuCategoryResponse> getAllMenuCategories() {
-        return menuCategoryService.getAllMenuCategory();
+    @GetMapping("all")
+    public GenericRespose<List<MenuCategoryResponse>> getAllMenuCategories() {
+        List<MenuCategoryResponse> allMenuCategory = menuCategoryService.getAllMenuCategory();
+        return GenericRespose.ok(allMenuCategory);
     }
 
     @GetMapping("/{id}")
-    public MenuCategoryResponse getMenuCategory(@PathVariable Long id) {
-        return menuCategoryService.getMenuCategoryById(id);
+    public GenericRespose<MenuCategoryResponse> getMenuCategory(@PathVariable Long id) {
+        MenuCategoryResponse menuCategoryById = menuCategoryService.getMenuCategoryById(id);
+        return GenericRespose.ok(menuCategoryById);
+
     }
 
-    @PostMapping
-    public Long saveMenuCategory(@Valid @RequestBody MenuCategorySaveRequest request) {
-        return menuCategoryService.saveMenuCategory(request);
+    @PostMapping("save")
+    public GenericRespose<Long> saveMenuCategory(@Valid @RequestBody MenuCategorySaveRequest request) {
+        Long id = menuCategoryService.saveMenuCategory(request);
+        return GenericRespose.ok(id);
     }
 
-    @PutMapping
-    public Long update(@Valid @RequestBody MenuCategoryUpdateRequest request) {
-        return menuCategoryService.updateMenuCategory(request);
+    @PutMapping("update")
+    public GenericRespose<Long> update(@Valid @RequestBody MenuCategoryUpdateRequest request) {
+        Long id = menuCategoryService.updateMenuCategory(request);
+        return GenericRespose.ok(id);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
-        return menuCategoryService.deleteMenuCategory(id);
+    public GenericRespose<String> delete(@PathVariable Long id) {
+        String str = menuCategoryService.deleteMenuCategory(id);
+        return GenericRespose.ok(str);
+
     }
 
 }

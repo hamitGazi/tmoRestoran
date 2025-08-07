@@ -36,10 +36,11 @@ public class MusteriGeriBildirimServiceImpl implements MusteriGeriBildirimServic
     @Override
     public Long saveMusteriGeriBildirim(MusteriGeriBildirimSaveRequest request) {
         MusteriGeriBildirimEntity entity = new MusteriGeriBildirimEntity();
-      entity.setSiparis(siparisRepository.getReferenceById(request.siparisId()));
+      entity.setSiparis(request.siparis());
       entity.setYorum(request.yorum());
-      entity.setMusteriAdi(request.musteriAdi());
+      entity.setMusteriAd(request.musteriAd());
       entity.setPuan(request.puan());
+      entity.setGeriBildirimTur(request.geriBildirimtur());
       entity.setOlusturmaTarih(LocalDateTime.now());
         return musteriGeriBildirimRepository.save(entity).getId();
     }
@@ -49,8 +50,11 @@ public class MusteriGeriBildirimServiceImpl implements MusteriGeriBildirimServic
         MusteriGeriBildirimEntity entity  = musteriGeriBildirimRepository.findById(request.id())
                 .orElseThrow(() -> new BaseException(
                         GenericRespose.error("MusteriGeriBildirim Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+        entity.setSiparis(request.siparis());
         entity.setYorum(request.yorum());
+        entity.setMusteriAd(request.musteriAd());
         entity.setPuan(request.puan());
+        entity.setGeriBildirimTur(request.geriBildirimtur());
         entity.setGuncelleTarih(LocalDateTime.now());
         return musteriGeriBildirimRepository.save(entity).getId();
     }

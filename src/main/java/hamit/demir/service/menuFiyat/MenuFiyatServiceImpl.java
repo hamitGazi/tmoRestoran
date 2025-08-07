@@ -31,7 +31,7 @@ public class MenuFiyatServiceImpl implements MenuFiyatService {
     @Override
     public Long saveMenuFiyat(MenuFiyatSaveRequest request) {
         MenuFiyatEntity entity = new MenuFiyatEntity();
-       entity.setMenuItem(menuItemRepository.getReferenceById(request.menuItemId()));
+       entity.setMenuItem(menuItemRepository.getReferenceById(request.menuItem()));
        entity.setFiyat(request.fiyat());
        entity.setIndirimFiyati(request.indirimFiyati());
        entity.setGecerlilikBaslangic(request.gecerlilikBaslangic());

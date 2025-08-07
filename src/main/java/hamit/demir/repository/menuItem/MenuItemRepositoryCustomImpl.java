@@ -4,6 +4,7 @@ import com.querydsl.core.types.Projections;
 import hamit.demir.model.dto.masa.MasaResponse;
 import hamit.demir.model.dto.masaCategory.MenuCategoryResponse;
 import hamit.demir.model.dto.menuItem.MenuItemResponse;
+import hamit.demir.model.dto.menuItem.ProjeIdAdRecord;
 import hamit.demir.model.entity.*;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
@@ -20,11 +21,11 @@ public class MenuItemRepositoryCustomImpl extends QuerydslRepositorySupport impl
         QMenuItemEntity root = QMenuItemEntity.menuItemEntity;
         QMenuCategoryEntity menuCategory = QMenuCategoryEntity.menuCategoryEntity;
 
-        return from(root).select(Projections.constructor(MenuItemResponse.class,
+        return from(root).leftJoin(root.kategori,menuCategory).select(Projections.constructor(MenuItemResponse.class,
                 root.id,
                 root.ad,
                 root.aciklama,
-                Projections.constructor(MenuCategoryResponse.class,
+                Projections.constructor(ProjeIdAdRecord.class,
                 menuCategory.id,
                 menuCategory.ad),
                 root.aktif,
@@ -40,11 +41,11 @@ public class MenuItemRepositoryCustomImpl extends QuerydslRepositorySupport impl
         QMenuItemEntity root = QMenuItemEntity.menuItemEntity;
         QMenuCategoryEntity menuCategory = QMenuCategoryEntity.menuCategoryEntity;
 
-        return from(root).select(Projections.constructor(MenuItemResponse.class,
+        return from(root).leftJoin(root.kategori,menuCategory).select(Projections.constructor(MenuItemResponse.class,
                 root.id,
                 root.ad,
                 root.aciklama,
-                Projections.constructor(MenuCategoryResponse.class,
+                Projections.constructor(ProjeIdAdRecord.class,
                         menuCategory.id,
                         menuCategory.ad),
                 root.aktif,

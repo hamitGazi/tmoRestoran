@@ -40,7 +40,7 @@ public class OdemeServiceImpl implements OdemeService {
         entity.setTutar(request.tutar());
         entity.setYontemi(request.yontemi());
         entity.setOdemeDurum(request.durum());
-        entity.setSiparis(siparisRepository.getReferenceById(request.siparisId()));
+        entity.setSiparis(siparisRepository.getReferenceById(request.siparis()));
         entity.setOdemeZamani(LocalDateTime.now());
         return odemeRepository.save(entity).getId();
     }

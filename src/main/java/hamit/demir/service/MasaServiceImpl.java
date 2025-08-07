@@ -7,15 +7,19 @@ import hamit.demir.model.entity.MasaEntity;
 import hamit.demir.repository.MasaRepository;
 import hamit.demir.utils.BaseException;
 import hamit.demir.utils.GenericRespose;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class MasaServiceImpl implements MasaService{
+@Transactional
+@RequiredArgsConstructor
+public class MasaServiceImpl implements MasaService {
 
-    private MasaRepository masaRepository;
+    private final MasaRepository masaRepository;
 
 
     @Override
@@ -26,7 +30,7 @@ public class MasaServiceImpl implements MasaService{
     @Override
     public MasaResponse getMasaById(Long id) {
 
-        return masaRepository.fetchMasaById( id) ;
+        return masaRepository.fetchMasaById(id);
     }
 
     @Override
@@ -35,6 +39,7 @@ public class MasaServiceImpl implements MasaService{
         masaEntity.setQrKodUrl(request.qrKodUrl());
         masaEntity.setKapasite(request.kapasite());
         masaEntity.setMasaKonum(request.masaKonum());
+        masaEntity.setOlusturmaTarih(LocalDateTime.now());
         return masaRepository.save(masaEntity).getId();
     }
 

@@ -8,8 +8,7 @@ public record MusteriResponse (
         String soyad,
         String telefon,
         String email,
-        LocalDateTime olusturmaTarih,
-        LocalDateTime guncelleTarih
-
+        String adres,
+        LocalDateTime olusturmaTarih
 ){
 }

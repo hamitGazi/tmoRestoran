@@ -38,8 +38,8 @@ public class SiparisKalemiServiceImpl implements SiparisKalemiService {
     @Override
     public Long saveSiparisKalemi(SiparisKalemiSaveRequest request) {
         SiparisKalemiEntity entity = new SiparisKalemiEntity();
-        entity.setSiparis(siparisRepository.getReferenceById(request.siparisId()));
-        entity.setMenuItem(menuItemRepository.getReferenceById(request.menuItemId()));
+        entity.setSiparis(siparisRepository.getReferenceById(request.siparis()));
+        entity.setMenuItem(menuItemRepository.getReferenceById(request.menuItem()));
         entity.setAdet(request.adet());
         entity.setEkOzellikler(request.ekOzellikler());
         entity.setNot(request.not());

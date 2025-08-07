@@ -14,7 +14,6 @@ public class StokKalemiEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     /**
      * Malzemenin adı (örnek: "Kıyma", "Yoğurt").
      */

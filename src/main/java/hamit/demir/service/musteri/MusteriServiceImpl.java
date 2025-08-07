@@ -37,7 +37,8 @@ public class MusteriServiceImpl implements MusteriService {
        entity.setSoyad(request.soyad());
        entity.setTelefon(request.telefon());
        entity.setEmail(request.email());
-       entity.setSifre(request.sifre());
+       entity.setAdres(request.adres());
+   /*    entity.setSifre(request.sifre());*/
        entity.setOlusturmaTarih(LocalDateTime.now());
 
         return musteriRepository.save(entity).getId();
@@ -53,6 +54,7 @@ public class MusteriServiceImpl implements MusteriService {
         entity.setSoyad(request.soyad());
         entity.setTelefon(request.telefon());
         entity.setEmail(request.email());
+        entity.setAdres(request.adres());
         entity.setGuncelleTarih(LocalDateTime.now());
         return musteriRepository.save(entity).getId();
     }

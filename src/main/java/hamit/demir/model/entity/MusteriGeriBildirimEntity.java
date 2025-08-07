@@ -9,18 +9,16 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name="musteri_geri_bildirimi",schema = "alakart")
+@Table(name="musteri_geri_bildirim",schema = "alakart")
 public class MusteriGeriBildirimEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     /**
      * Hangi siparişten sonra alındı.
      */
-    @ManyToOne
-    private SiparisEntity siparis;
+    private String siparis;
     /**
      * 1–5 arası puan.
      */
@@ -31,13 +29,13 @@ public class MusteriGeriBildirimEntity {
     /**
      * Müşterinin yorum metni.
      */
-    @Column(name = "yorum",columnDefinition = "TEXT",nullable = false)
+    @Column(name = "yorum",columnDefinition = "TEXT")
     private String yorum;
     @Column(name = "musteri_adi")
-    private String musteriAdi;
-
+    private String musteriAd;
+    @Column(name = "geri_bildirim-tur",columnDefinition = "TEXT")
+    GeriBildirimTuruEnum geriBildirimTur;
     private LocalDateTime olusturmaTarih;
-
     private LocalDateTime guncelleTarih;
 
 }

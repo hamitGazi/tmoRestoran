@@ -1,10 +1,12 @@
 package hamit.demir.model.dto.menuFiyat;
 
+import hamit.demir.model.dto.menuItem.ProjeIdAdRecord;
+
 import java.time.LocalDateTime;
 
 public record MenuFiyatResponse(
         Long id,
-        Long menuItemId,
+        ProjeIdAdRecord menuItem,
         Double fiyat,
         Double indirimFiyati,
         LocalDateTime gecerlilikBaslangic,

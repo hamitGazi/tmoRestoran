@@ -19,7 +19,7 @@ public enum MasaDurumu {
     private final String label;
 
     public static GenericRespose<List<EnumRecord>> masaDurumEnumList() {
-        List<EnumRecord> list = Arrays.stream(Birim.values()).map(deger -> new EnumRecord(deger.name(), deger.getLabel())).toList();
+        List<EnumRecord> list = Arrays.stream(MasaDurumu.values()).map(deger -> new EnumRecord(deger.name(), deger.getLabel())).toList();
    return GenericRespose.ok(list);
     }
 

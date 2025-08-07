@@ -5,10 +5,10 @@ import jakarta.validation.constraints.NotNull;
 
 public record MenuItemSaveRequest(
         @NotBlank String ad,
-        String aciklama,
         @NotNull Long kategoriId,
-        @NotNull Boolean aktif,
+        Boolean aktif,
         String resimYolu,
+        String aciklama,
         String ekOzellikler
 
 ) {

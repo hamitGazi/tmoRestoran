@@ -6,7 +6,7 @@ public record MenuItemResponse(
         Long id,
         String ad,
         String aciklama,
-        Long kategori,
+        ProjeIdAdRecord kategori,
         Boolean aktif,
         String resimYolu,
         String ekOzellikler,

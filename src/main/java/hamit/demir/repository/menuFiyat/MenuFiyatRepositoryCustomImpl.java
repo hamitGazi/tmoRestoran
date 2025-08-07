@@ -4,6 +4,7 @@ import com.querydsl.core.types.Projections;
 import hamit.demir.model.dto.masa.MasaResponse;
 import hamit.demir.model.dto.menuFiyat.MenuFiyatResponse;
 import hamit.demir.model.dto.menuItem.MenuItemResponse;
+import hamit.demir.model.dto.menuItem.ProjeIdAdRecord;
 import hamit.demir.model.entity.*;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
@@ -23,7 +24,7 @@ public class MenuFiyatRepositoryCustomImpl extends QuerydslRepositorySupport imp
 
         return from(root).leftJoin(root.menuItem,menuItem).select(Projections.constructor(MenuFiyatResponse.class,
                 root.id,
-                Projections.constructor(MenuItemResponse.class,
+                Projections.constructor(ProjeIdAdRecord.class,
                 menuItem.id,
                 menuItem.ad),
                 root.fiyat,
@@ -42,7 +43,7 @@ public class MenuFiyatRepositoryCustomImpl extends QuerydslRepositorySupport imp
 
         return from(root).leftJoin(root.menuItem,menuItem).select(Projections.constructor(MenuFiyatResponse.class,
                 root.id,
-                Projections.constructor(MenuItemResponse.class,
+                Projections.constructor(ProjeIdAdRecord.class,
                         menuItem.id,
                         menuItem.ad),
                 root.fiyat,

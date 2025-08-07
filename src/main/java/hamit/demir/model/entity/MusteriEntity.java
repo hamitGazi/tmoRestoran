@@ -30,10 +30,12 @@ public class MusteriEntity {
     @Column(name = "musteri_adi", nullable = false, unique = true)
     private String email;
 
-    @NotBlank(message = "Şifre boş olamaz")
+/*    @NotBlank(message = "Şifre boş olamaz")
     @Size(min = 6, message = "Şifre en az 6 karakter olmalıdır")
     @Column(name = "sifre", nullable = false)
-    private String sifre;
+    private String sifre;*/
+    @Column(name = "adres",columnDefinition = "TEXT")
+    private String adres;
 
     private LocalDateTime olusturmaTarih;
 
