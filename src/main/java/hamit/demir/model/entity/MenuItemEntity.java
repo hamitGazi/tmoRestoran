@@ -1,12 +1,16 @@
 package hamit.demir.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "menu_urunler",schema = "alakart")
 public class MenuItemEntity {
     @Id

@@ -1,13 +1,12 @@
 package hamit.demir.repository.siparis;
 
-import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.dto.siparis.SiparisResponse;
+import hamit.demir.model.dto.siparis.SiparisAllResponse;
 
 import java.util.List;
 
 public interface SiparisRepositoryCustom {
 
-    List<SiparisResponse> getAllSiparisler();
+    List<SiparisAllResponse> getAllSiparisler();
 
-    SiparisResponse fetchSiparisById(Long id);
+    SiparisAllResponse fetchSiparisById(Long id);
 }

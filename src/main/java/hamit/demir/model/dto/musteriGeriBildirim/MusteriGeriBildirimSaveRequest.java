@@ -1,5 +1,7 @@
 package hamit.demir.model.dto.musteriGeriBildirim;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import hamit.demir.model.dto.enumlar.EnumRecord;
 import hamit.demir.model.entity.GeriBildirimTuruEnum;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -9,8 +11,10 @@ public record MusteriGeriBildirimSaveRequest(
         @Min(1) @Max(5) int puan,
         String yorum,
         String musteriAd,
-        GeriBildirimTuruEnum geriBildirimtur
+        @JsonProperty("geriBildirimTur") GeriBildirimTuruEnum geriBildirimtur
+
 
 
 ) {
+
 }

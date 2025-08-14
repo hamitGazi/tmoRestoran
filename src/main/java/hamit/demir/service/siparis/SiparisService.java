@@ -1,25 +1,23 @@
 package hamit.demir.service.siparis;
 
-import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.dto.masa.MasaSaveRequest;
-import hamit.demir.model.dto.masa.MasaUpdateRequest;
-import hamit.demir.model.dto.siparis.SiparisResponse;
+import hamit.demir.model.dto.siparis.SiparisAllResponse;
 import hamit.demir.model.dto.siparis.SiparisSaveRequest;
 import hamit.demir.model.dto.siparis.SiparisUpdateRequest;
-import jakarta.validation.Valid;
+import hamit.demir.model.dto.siparisKalemi.SiparisKalemiUpdateRequest;
 
 import java.util.List;
 
 public interface SiparisService {
 
 
-    List<SiparisResponse> getAllSiparisler();
+    List<SiparisAllResponse> getAllSiparisler();
 
-    SiparisResponse getSiparisById(Long id);
-
+    SiparisAllResponse getSiparisById(Long id);
     Long saveSiparis(SiparisSaveRequest request);
 
     Long updateSiparis(SiparisUpdateRequest request);
 
     String deleteSiparis(Long id);
+
+    void siparisOdmeAndUpdateStok(Long odemeId);
 }

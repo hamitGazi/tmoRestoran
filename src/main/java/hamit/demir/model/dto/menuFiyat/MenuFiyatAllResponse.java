@@ -2,13 +2,13 @@ package hamit.demir.model.dto.menuFiyat;
 
 import hamit.demir.model.dto.menuItem.ProjeIdAdRecord;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record MenuFiyatResponse(
+public record MenuFiyatAllResponse(
         Long id,
         ProjeIdAdRecord menuItem,
-        Double fiyat,
-        Double indirimFiyati,
+        BigDecimal fiyat,
         LocalDateTime gecerlilikBaslangic,
         LocalDateTime gecerlilikBitis,
         Boolean aktif,

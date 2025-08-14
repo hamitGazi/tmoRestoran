@@ -1,20 +1,14 @@
 package hamit.demir.controller;
 
 import hamit.demir.model.dto.enumlar.EnumRecord;
-import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.dto.masa.MasaSaveRequest;
-import hamit.demir.model.dto.masa.MasaUpdateRequest;
 import hamit.demir.model.dto.musteriGeriBildirim.MusteriGeriBildirimResponse;
 import hamit.demir.model.dto.musteriGeriBildirim.MusteriGeriBildirimSaveRequest;
 import hamit.demir.model.dto.musteriGeriBildirim.MusteriGeriBildirimUpdateRequest;
 import hamit.demir.model.entity.GeriBildirimTuruEnum;
-import hamit.demir.model.entity.MasaKonum;
-import hamit.demir.service.MasaService;
 import hamit.demir.service.musteriGeriBildirim.MusteriGeriBildirimService;
-import hamit.demir.utils.GenericRespose;
+import hamit.demir.utils.GenericResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.eclipse.jdt.internal.compiler.env.IGenericField;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,45 +21,45 @@ public class MusteriGeriBildirimController {
     private final MusteriGeriBildirimService musteriGeriBildirimService;
 
     @GetMapping("all")
-        public GenericRespose<List<MusteriGeriBildirimResponse>> getAllMusteriGeriBildirimler() {
+        public GenericResponse<List<MusteriGeriBildirimResponse>> getAllMusteriGeriBildirimler() {
 
         List<MusteriGeriBildirimResponse> allMusteriGeriBildirimler = musteriGeriBildirimService.getAllMusteriGeriBildirimler();
-        return GenericRespose.ok(allMusteriGeriBildirimler);
+        return GenericResponse.ok(allMusteriGeriBildirimler);
 
     }
 
     @GetMapping("/{id}")
-    public GenericRespose<MusteriGeriBildirimResponse> getMusteriGeriBildirimById(@PathVariable Long id) {
+    public GenericResponse<MusteriGeriBildirimResponse> getMusteriGeriBildirimById(@PathVariable Long id) {
 
         MusteriGeriBildirimResponse musteriGeriBildirimResponse = musteriGeriBildirimService.getMusteriGeriBildirimById(id);
-        return GenericRespose.ok(musteriGeriBildirimResponse);
+        return GenericResponse.ok(musteriGeriBildirimResponse);
     }
 
     @PostMapping("save")
-    public GenericRespose<Long> saveMusteriGeriBildirim(@Valid @RequestBody MusteriGeriBildirimSaveRequest request) {
+    public GenericResponse<Long> saveMusteriGeriBildirim(@Valid @RequestBody MusteriGeriBildirimSaveRequest request) {
 
         Long id = musteriGeriBildirimService.saveMusteriGeriBildirim(request);
-        return GenericRespose.ok(id);
+        return GenericResponse.ok(id);
     }
 
     @PutMapping("update")
-    public GenericRespose<Long> updateMusteriGeriBildirim(@Valid @RequestBody MusteriGeriBildirimUpdateRequest request) {
+    public GenericResponse<Long> updateMusteriGeriBildirim(@Valid @RequestBody MusteriGeriBildirimUpdateRequest request) {
 
         Long id = musteriGeriBildirimService.updateMusteriGeriBildirim(request);
-        return GenericRespose.ok(id);
+        return GenericResponse.ok(id);
     }
 
     @DeleteMapping("/{id}")
-    public GenericRespose<String> deleteMusteriGeriBildirim(@PathVariable Long id) {
+    public GenericResponse<String> deleteMusteriGeriBildirim(@PathVariable Long id) {
 
         String str = musteriGeriBildirimService.deleteMusteriGeriBildirim(id);
-        return GenericRespose.ok(str);
+        return GenericResponse.ok(str);
     }
     @GetMapping("tur-enum")
 
-    public GenericRespose <List<EnumRecord> >getGeriBildirimTurEnum() {
+    public GenericResponse<List<EnumRecord> > getGeriBildirimTurEnum() {
         List<EnumRecord> enumRecords = GeriBildirimTuruEnum.geriBildirimListesi();
-        return GenericRespose.ok(enumRecords);
+        return GenericResponse.ok(enumRecords);
 
     }
 

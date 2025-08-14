@@ -6,7 +6,7 @@ import hamit.demir.model.dto.masa.MasaUpdateRequest;
 import hamit.demir.model.entity.MasaEntity;
 import hamit.demir.repository.MasaRepository;
 import hamit.demir.utils.BaseException;
-import hamit.demir.utils.GenericRespose;
+import hamit.demir.utils.GenericResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -47,7 +47,7 @@ public class MasaServiceImpl implements MasaService {
     public Long updateMasa(MasaUpdateRequest request) {
         MasaEntity masaEntity = masaRepository.findById(request.id())
                 .orElseThrow(() -> new BaseException(
-                        GenericRespose.error("Masa Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+                        GenericResponse.error("Masa Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
         masaEntity.setQrKodUrl(request.qrKodUrl());
         masaEntity.setKapasite(request.kapasite());
         masaEntity.setMasaKonum(request.masaKonum());
@@ -59,7 +59,7 @@ public class MasaServiceImpl implements MasaService {
     public String deleteMasa(Long id) {
         MasaEntity masaEntity = masaRepository.findById(id)
                 .orElseThrow(() -> new BaseException(
-                        GenericRespose.error("Masa Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+                        GenericResponse.error("Masa Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
         masaRepository.deleteById(masaEntity.getId());
         return "Silme işlemi başarılı";
     }

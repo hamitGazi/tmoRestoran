@@ -1,13 +1,18 @@
 package hamit.demir.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
     @Data
     @Entity
+    @AllArgsConstructor
+    @NoArgsConstructor
    @Table(name = "menu_fiyatlar",schema="alakart")
     public class MenuFiyatEntity {
         @Id
@@ -25,13 +30,8 @@ import java.time.LocalDateTime;
          * Ürünün fiyatı (örneğin: 59.90).
          */
         @Column(name = "fiyat", nullable = false)
-        private Double fiyat;
+        private BigDecimal fiyat;
 
-        /**
-         * İndirimli fiyat (varsa, örneğin: 49.90).
-         */
-        @Column(name = "indirim_fiyati")
-        private Double indirimFiyati;
 
         /**
          * Fiyatın geçerli olduğu başlangıç zamanı.

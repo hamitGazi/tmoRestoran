@@ -4,49 +4,57 @@ import hamit.demir.model.dto.siparisKalemi.SiparisKalemiResponse;
 import hamit.demir.model.dto.siparisKalemi.SiparisKalemiSaveRequest;
 import hamit.demir.model.dto.siparisKalemi.SiparisKalemiUpdateRequest;
 import hamit.demir.service.sipariKalemi.SiparisKalemiService;
-import hamit.demir.utils.GenericRespose;
+import hamit.demir.utils.GenericResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
-@RequestMapping("siparis-kalemi")
+@RequestMapping("siparis-kalem")
 @RequiredArgsConstructor
 public class SiparisKalemiController {
 
     private final SiparisKalemiService siparisKalemiService;
 
     @GetMapping("all")
-    public GenericRespose<List<SiparisKalemiResponse>> getAllSiparisKalemler() {
+    public GenericResponse<List<SiparisKalemiResponse>> getAllSiparisKalemler() {
 
         List<SiparisKalemiResponse> allSiparisKalemler = siparisKalemiService.getAllSiparisKalemler();
-        return GenericRespose.ok(allSiparisKalemler);
+        return GenericResponse.ok(allSiparisKalemler);
     }
 
     @GetMapping("/{id}")
-    public GenericRespose<SiparisKalemiResponse> getSiparisKalemi(@PathVariable Long id) {
+    public GenericResponse<SiparisKalemiResponse> getSiparisKalemiById(@PathVariable Long id) {
 
         SiparisKalemiResponse siparisKalemiById = siparisKalemiService.getSiparisKalemiById(id);
-        return GenericRespose.ok(siparisKalemiById);
+        return GenericResponse.ok(siparisKalemiById);
+    }
+    @GetMapping("by-siparis/{id}")
+    public GenericResponse<List<SiparisKalemiResponse>> getKalemlerBySiparisId(@PathVariable Long id) {
+
+        List<SiparisKalemiResponse> siparisKalemler = siparisKalemiService.getKalemlerBySiparisId(id);
+        return GenericResponse.ok(siparisKalemler);
     }
 
     @PostMapping("save")
-    public GenericRespose<Long> saveSiparisKalemi(@Valid @RequestBody SiparisKalemiSaveRequest request) {
+    public GenericResponse<Long> saveSiparisKalemi(@Valid @RequestBody SiparisKalemiSaveRequest request) {
         Long id = siparisKalemiService.saveSiparisKalemi(request);
-        return GenericRespose.ok(id);
+        return GenericResponse.ok(id);
     }
 
     @PutMapping("update")
-    public GenericRespose<Long> updateSiparisKalemi(@Valid @RequestBody SiparisKalemiUpdateRequest request) {
-
+    public GenericResponse<Long> updateSiparisKalemi(@Valid @RequestBody SiparisKalemiUpdateRequest request) {
         Long id = siparisKalemiService.updateSiparisKalemi(request);
-        return GenericRespose.ok(id);
+        return GenericResponse.ok(id);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteSiparisKalemi(@PathVariable Long id) {
-        return siparisKalemiService.deleteSiparisKalemi(id);
+
+    @DeleteMapping("delete/{id}")
+    public GenericResponse<String> deleteSiparisKalemi(@PathVariable Long id) {
+        String str = siparisKalemiService.deleteSiparisKalemi(id);
+        return GenericResponse.ok(str);
     }
 }
+

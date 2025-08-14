@@ -4,15 +4,16 @@ import hamit.demir.model.dto.enumlar.EnumRecord;
 import hamit.demir.model.dto.odeme.OdemeResponse;
 import hamit.demir.model.dto.odeme.OdemeSaveRequest;
 import hamit.demir.model.dto.odeme.OdemeUpdateRequest;
+import hamit.demir.model.entity.OdemeDurumu;
 import hamit.demir.model.entity.OdemeYontem;
 import hamit.demir.service.odeme.OdemeService;
-import hamit.demir.utils.GenericRespose;
+import hamit.demir.utils.GenericResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("odeme")
 @RequiredArgsConstructor
@@ -20,40 +21,47 @@ public class OdemeController {
 
     private final OdemeService odemeService;
 
-    @GetMapping("yontem-enum")
-    public GenericRespose<List<EnumRecord>> getYontemEnum() {
+    @GetMapping("yontemOdeme-enum")
+    public GenericResponse<List<EnumRecord>> getYontemEnum() {
 
         List<EnumRecord> enumRecords = OdemeYontem.oedmeYontemEnumList();
-        return GenericRespose.ok(enumRecords);
+        return GenericResponse.ok(enumRecords);
+    }
+
+    @GetMapping("durumOdeme-enum")
+    public GenericResponse<List<EnumRecord>> getDurumEnum() {
+
+        List<EnumRecord> enumRecords = OdemeDurumu.odemeDurumEnumList();
+        return GenericResponse.ok(enumRecords);
     }
 
 
     @GetMapping("all")
-    public GenericRespose<List<OdemeResponse>> getAllOdemeler() {
+    public GenericResponse<List<OdemeResponse>> getAllOdemeler() {
 
         List<OdemeResponse> allOdemeler = odemeService.getAllOdemeler();
-        return GenericRespose.ok(allOdemeler);
+        return GenericResponse.ok(allOdemeler);
     }
 
     @GetMapping("/{id}")
-    public GenericRespose<OdemeResponse> getOdemeById(@PathVariable Long id) {
+    public GenericResponse<OdemeResponse> getOdemeById(@PathVariable Long id) {
 
         OdemeResponse odemeById = odemeService.getOdemeById(id);
-        return GenericRespose.ok(odemeById);
+        return GenericResponse.ok(odemeById);
     }
 
     @PostMapping("save")
-    public GenericRespose<Long> saveOdeme(@Valid @RequestBody OdemeSaveRequest request) {
+    public GenericResponse<Long> saveOdeme(@Valid @RequestBody OdemeSaveRequest request) {
 
         Long id = odemeService.saveOdeme(request);
-        return GenericRespose.ok(id);
+        return GenericResponse.ok(id);
     }
 
     @PutMapping("update")
-    public GenericRespose<Long> updateOdeme(@Valid @RequestBody OdemeUpdateRequest request) {
+    public GenericResponse<Long> updateOdeme(@Valid @RequestBody OdemeUpdateRequest request) {
 
         Long id = odemeService.updateOdeme(request);
-        return GenericRespose.ok(id);
+        return GenericResponse.ok(id);
     }
 
 

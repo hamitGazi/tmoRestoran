@@ -13,11 +13,11 @@ import java.util.List;
 public enum OdemeYontem {
     NAKIT("Nakit"),
     KREDI_KARTI("Kredi Kartı"),
-    ONLINE("Online Ödeme");
-
+    ONLINE("Online Ödeme"),
+    SECILMEDI("Seçilmedi");
     private final String label;
     public static List<EnumRecord> oedmeYontemEnumList() {
-        return Arrays.stream(Birim.values()).map(deger-> new EnumRecord(deger.name(),deger.getLabel())).toList();
+        return Arrays.stream(OdemeYontem.values()).map(deger-> new EnumRecord(deger.name(),deger.getLabel())).toList();
     }
 
 }

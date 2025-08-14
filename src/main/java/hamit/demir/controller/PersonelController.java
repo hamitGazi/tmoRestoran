@@ -1,22 +1,18 @@
 package hamit.demir.controller;
 
 import hamit.demir.model.dto.enumlar.EnumRecord;
-import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.dto.masa.MasaSaveRequest;
-import hamit.demir.model.dto.masa.MasaUpdateRequest;
-import hamit.demir.model.dto.personel.PersonelResponse;
+import hamit.demir.model.dto.personel.PersonelAllResponse;
 import hamit.demir.model.dto.personel.PersonelSaveRequest;
 import hamit.demir.model.dto.personel.PersonelUpdateRequest;
 import hamit.demir.model.entity.PersonelRol;
-import hamit.demir.service.MasaService;
 import hamit.demir.service.personel.PersonelService;
-import hamit.demir.utils.GenericRespose;
+import hamit.demir.utils.GenericResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("personel")
 @RequiredArgsConstructor
@@ -25,35 +21,35 @@ public class PersonelController {
     private final PersonelService personelServicee;
 
     @GetMapping("rol-enum")
-    public GenericRespose<List<EnumRecord>> getAllRolEnum() {
+    public GenericResponse<List<EnumRecord>> getAllRolEnum() {
 
         List<EnumRecord> enumRecords = PersonelRol.personelRolEnumList();
-        return GenericRespose.ok(enumRecords);
+        return GenericResponse.ok(enumRecords);
     }
 
     @GetMapping("all")
-    public GenericRespose<List<PersonelResponse>> getAllPersonel() {
-        List<PersonelResponse> allPersonel = personelServicee.getAllPersonel();
-        return GenericRespose.ok(allPersonel);
+    public GenericResponse<List<PersonelAllResponse>> getAllPersonel() {
+        List<PersonelAllResponse> allPersonel = personelServicee.getAllPersonel();
+        return GenericResponse.ok(allPersonel);
     }
 
     @GetMapping("/{id}")
-    public PersonelResponse getPersonelById(@PathVariable Long id) {
+    public PersonelAllResponse getPersonelById(@PathVariable Long id) {
         return personelServicee.getPersonelById(id);
     }
 
     @PostMapping("save")
-    public  GenericRespose<Long> savePersonel(@Valid @RequestBody PersonelSaveRequest request) {
+    public GenericResponse<Long> savePersonel(@Valid @RequestBody PersonelSaveRequest request) {
 
         Long id = personelServicee.savePersonel(request);
-        return GenericRespose.ok(id);
+        return GenericResponse.ok(id);
     }
 
     @PutMapping
-    public GenericRespose<Long> updatePersonel(@Valid @RequestBody PersonelUpdateRequest request) {
+    public GenericResponse<Long> updatePersonel(@Valid @RequestBody PersonelUpdateRequest request) {
 
         Long id = personelServicee.updatePersonel(request);
-        return GenericRespose.ok(id);
+        return GenericResponse.ok(id);
     }
 
     @DeleteMapping("/{id}")

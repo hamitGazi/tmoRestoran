@@ -7,7 +7,7 @@ import hamit.demir.model.entity.MusteriGeriBildirimEntity;
 import hamit.demir.repository.musteriGeriBildirim.MusteriGeriBildirimRepository;
 import hamit.demir.repository.siparis.SiparisRepository;
 import hamit.demir.utils.BaseException;
-import hamit.demir.utils.GenericRespose;
+import hamit.demir.utils.GenericResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -49,7 +49,7 @@ public class MusteriGeriBildirimServiceImpl implements MusteriGeriBildirimServic
     public Long updateMusteriGeriBildirim(MusteriGeriBildirimUpdateRequest request) {
         MusteriGeriBildirimEntity entity  = musteriGeriBildirimRepository.findById(request.id())
                 .orElseThrow(() -> new BaseException(
-                        GenericRespose.error("MusteriGeriBildirim Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+                        GenericResponse.error("MusteriGeriBildirim Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
         entity.setSiparis(request.siparis());
         entity.setYorum(request.yorum());
         entity.setMusteriAd(request.musteriAd());
@@ -63,7 +63,7 @@ public class MusteriGeriBildirimServiceImpl implements MusteriGeriBildirimServic
     public String deleteMusteriGeriBildirim(Long id) {
         MusteriGeriBildirimEntity entity = musteriGeriBildirimRepository.findById(id)
                 .orElseThrow(() -> new BaseException(
-                        GenericRespose.error("MusteriGeriBildirim Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+                        GenericResponse.error("MusteriGeriBildirim Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
         musteriGeriBildirimRepository.deleteById(entity.getId());
         return "Silme işlemi başarılı";
     }

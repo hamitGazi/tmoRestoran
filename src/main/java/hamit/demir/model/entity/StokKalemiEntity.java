@@ -1,12 +1,17 @@
 package hamit.demir.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "stok_kalemleri",schema = "alakart")
 public class StokKalemiEntity {
 
@@ -24,7 +29,10 @@ public class StokKalemiEntity {
      * Mevcut miktar.
      */
     @Column(name = "miktar", nullable = false)
-    private Integer miktar;
+    private BigDecimal miktar;
+
+    @Column(name = "kiritik-miktar", nullable = false)
+    private BigDecimal kiritikMiktar;
 
     /**
      * Birim (örnek: KG, ADET, LITRE).

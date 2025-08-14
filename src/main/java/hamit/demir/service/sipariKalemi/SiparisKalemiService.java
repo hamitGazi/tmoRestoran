@@ -19,7 +19,11 @@ public interface SiparisKalemiService {
 
     Long saveSiparisKalemi(SiparisKalemiSaveRequest request);
 
-    Long updateSiparisKalemi(SiparisKalemiUpdateRequest request);
+
 
     String deleteSiparisKalemi(Long id);
+
+   List< SiparisKalemiResponse> getKalemlerBySiparisId(Long id);
+
+    Long updateSiparisKalemi(@Valid SiparisKalemiUpdateRequest request);
 }

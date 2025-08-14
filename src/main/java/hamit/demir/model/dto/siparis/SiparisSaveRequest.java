@@ -1,11 +1,17 @@
 package hamit.demir.model.dto.siparis;
 
-import jakarta.validation.constraints.NotNull;
+import hamit.demir.model.dto.siparisKalemi.SiparisKalemiSaveRequest;
+
+import java.util.List;
 
 public record SiparisSaveRequest(
-        @NotNull Long masaId,
+        Long masa,
         String musteriAd,
-        @NotNull Long personelId,
-        String not
+        Long personel,
+        List<SiparisKalemiSaveRequest> menuItems,
+        String siparisNot
+
+
 ) {
 }
+

@@ -19,7 +19,7 @@ public enum PersonelRol {
     private final String label;
 
     public static List<EnumRecord> personelRolEnumList() {
-        return Arrays.stream(Birim.values()).map(deger -> new EnumRecord(deger.name(), deger.getLabel())).toList();
+        return Arrays.stream(PersonelRol.values()).map(deger -> new EnumRecord(deger.name(), deger.getLabel())).toList();
     }
 
 }

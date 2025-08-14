@@ -1,14 +1,13 @@
 package hamit.demir.service.personel;
 
-import hamit.demir.model.dto.personel.PersonelResponse;
+import hamit.demir.model.dto.personel.PersonelAllResponse;
 import hamit.demir.model.dto.personel.PersonelSaveRequest;
 import hamit.demir.model.dto.personel.PersonelUpdateRequest;
 import hamit.demir.model.entity.PersonelEntity;
 import hamit.demir.repository.personel.PersonelRepository;
 import hamit.demir.utils.BaseException;
-import hamit.demir.utils.GenericRespose;
+import hamit.demir.utils.GenericResponse;
 import jakarta.transaction.Transactional;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,12 +23,12 @@ public class PersonelServiceImpl implements PersonelService {
     private final PersonelRepository personelRepository;
 
     @Override
-    public List<PersonelResponse> getAllPersonel() {
+    public List<PersonelAllResponse> getAllPersonel() {
         return personelRepository.fetchAllPersonel();
     }
 
     @Override
-    public PersonelResponse getPersonelById(Long id) {
+    public PersonelAllResponse getPersonelById(Long id) {
         return personelRepository.fetchPersonelById(id);
     }
 
@@ -50,7 +49,7 @@ public class PersonelServiceImpl implements PersonelService {
     public Long updatePersonel(PersonelUpdateRequest request) {
         PersonelEntity entity = personelRepository.findById(request.id())
                 .orElseThrow(() -> new BaseException(
-                        GenericRespose.error("Personel Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+                        GenericResponse.error("Personel Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
         entity.setAd(request.ad());
         entity.setSoyad(request.soyad());
 
@@ -64,7 +63,7 @@ public class PersonelServiceImpl implements PersonelService {
     public String deletePersonel(Long id) {
         PersonelEntity entity = personelRepository.findById(id)
                 .orElseThrow(() -> new BaseException(
-                        GenericRespose.error("Personel Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+                        GenericResponse.error("Personel Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
         personelRepository.deleteById(entity.getId());
         return "Silme işlemi başarılı";
     }

@@ -6,7 +6,7 @@ import hamit.demir.model.dto.StokKalemi.StokKalemiUpdateRequest;
 import hamit.demir.model.entity.StokKalemiEntity;
 import hamit.demir.repository.stokKalem.StokKalemRepository;
 import hamit.demir.utils.BaseException;
-import hamit.demir.utils.GenericRespose;
+import hamit.demir.utils.GenericResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,6 @@ public class StokKalemServiceImpl implements StokKalemService {
     @Override
     public Long saveStokKalem(StokKalemiSaveRequest request) {
         StokKalemiEntity entity = new StokKalemiEntity();
-
         entity.setAd(request.ad());
         entity.setMiktar(request.miktar());
         entity.setBirim(request.birim());
@@ -49,7 +48,7 @@ public class StokKalemServiceImpl implements StokKalemService {
     public Long updateStokKalem(StokKalemiUpdateRequest request) {
         StokKalemiEntity entity = stokKalemRepository.findById(request.id())
                 .orElseThrow(() -> new BaseException(
-                        GenericRespose.error("StokKalemi Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+                        GenericResponse.error("StokKalemi Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
         entity.setAd(request.ad());
         entity.setMiktar(request.miktar());
         entity.setBirim(request.birim());

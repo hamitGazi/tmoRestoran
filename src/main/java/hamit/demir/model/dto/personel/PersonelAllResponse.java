@@ -4,7 +4,7 @@ import hamit.demir.model.entity.PersonelRol;
 
 import java.time.LocalDateTime;
 
-public record PersonelResponse(
+public record PersonelAllResponse(
         Long id,
         String ad,
         String soyad,

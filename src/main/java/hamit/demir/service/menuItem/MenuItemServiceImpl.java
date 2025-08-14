@@ -1,5 +1,6 @@
 package hamit.demir.service.menuItem;
 
+import hamit.demir.model.dto.menuItem.MenuItemByCategoryIdResponse;
 import hamit.demir.model.dto.menuItem.MenuItemResponse;
 import hamit.demir.model.dto.menuItem.MenuItemSaveRequest;
 import hamit.demir.model.dto.menuItem.MenuItemUpdateRequest;
@@ -7,7 +8,7 @@ import hamit.demir.model.entity.MenuItemEntity;
 import hamit.demir.repository.menuCategory.MenuCategoryRepository;
 import hamit.demir.repository.menuItem.MenuItemRepository;
 import hamit.demir.utils.BaseException;
-import hamit.demir.utils.GenericRespose;
+import hamit.demir.utils.GenericResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -51,7 +52,7 @@ public class MenuItemServiceImpl implements MenuItemService {
     public Long updateMenuItem(MenuItemUpdateRequest request) {
         MenuItemEntity entity = menuItemRepository.findById(request.id())
                 .orElseThrow(() -> new BaseException(
-                        GenericRespose.error("MenuItem Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+                        GenericResponse.error("MenuItem Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
         entity.setAd(request.ad());
         entity.setAciklama(request.aciklama());
         entity.setKategori(menuCategoryRepository.getReferenceById(request.kategoriId()));
@@ -66,9 +67,14 @@ public class MenuItemServiceImpl implements MenuItemService {
     public String deleteMenuItem(Long id) {
         MenuItemEntity entity = menuItemRepository.findById(id)
                 .orElseThrow(() -> new BaseException(
-                        GenericRespose.error("MenuItem Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+                        GenericResponse.error("MenuItem Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
         menuItemRepository.deleteById(entity.getId());
         return "Silme işlemi başarılı";
+    }
+
+    @Override
+    public List<MenuItemByCategoryIdResponse> getMenuItemByMenuCategoryId(Long categoryId) {
+        return menuItemRepository.fetchMenuItemByMenuCategoryId(categoryId);
     }
 
 }

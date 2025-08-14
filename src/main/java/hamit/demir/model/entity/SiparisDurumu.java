@@ -19,7 +19,7 @@ public enum SiparisDurumu {
     private final String label;
 
     public static List<EnumRecord> siprisDurumEnumList() {
-        return Arrays.stream(Birim.values()).map(deger-> new EnumRecord(deger.name(),deger.getLabel())).toList();
+        return Arrays.stream(SiparisDurumu.values()).map(deger-> new EnumRecord(deger.name(),deger.getLabel())).toList();
     }
 
 

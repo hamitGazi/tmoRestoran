@@ -1,13 +1,17 @@
 package hamit.demir.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "masalar", schema = "alakart", indexes = {@Index(name = "idx_masa_kod", columnList = "kod")})
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "masalar", schema = "alakart", indexes = {@Index(name = "idx_masa_kod", columnList = "qr_kod_url")})
 public class MasaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

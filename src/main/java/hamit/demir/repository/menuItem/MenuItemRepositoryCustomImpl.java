@@ -3,6 +3,7 @@ package hamit.demir.repository.menuItem;
 import com.querydsl.core.types.Projections;
 import hamit.demir.model.dto.masa.MasaResponse;
 import hamit.demir.model.dto.masaCategory.MenuCategoryResponse;
+import hamit.demir.model.dto.menuItem.MenuItemByCategoryIdResponse;
 import hamit.demir.model.dto.menuItem.MenuItemResponse;
 import hamit.demir.model.dto.menuItem.ProjeIdAdRecord;
 import hamit.demir.model.entity.*;
@@ -54,5 +55,29 @@ public class MenuItemRepositoryCustomImpl extends QuerydslRepositorySupport impl
                 root.olusturmaTarih,
                 root.guncelemeTarih
         )).where(root.id.eq(id).and(root.aktif.eq(true))).fetchOne();
+    }
+
+    @Override
+    public List<MenuItemByCategoryIdResponse> fetchMenuItemByMenuCategoryId(Long categoryId) {
+        QMenuItemEntity root = QMenuItemEntity.menuItemEntity;
+        QMenuCategoryEntity menuCategory = QMenuCategoryEntity.menuCategoryEntity;
+        QMenuFiyatEntity menuFiyat = QMenuFiyatEntity.menuFiyatEntity;
+
+        return from(root).leftJoin(root.kategori,menuCategory).
+                leftJoin(menuFiyat).on(menuFiyat.menuItem.id.eq(root.id)).
+                select(Projections.constructor(MenuItemByCategoryIdResponse.class,
+                root.id,
+                root.ad,
+                root.aciklama,
+                menuFiyat.fiyat,
+                Projections.constructor(ProjeIdAdRecord.class,
+                        menuCategory.id,
+                        menuCategory.ad),
+                root.aktif,
+                root.resimYolu,
+                root.ekOzellikler,
+                root.olusturmaTarih,
+                root.guncelemeTarih
+        )).where(root.kategori.id.eq(categoryId).and(root.aktif.eq(true))).fetch();
     }
 }

@@ -13,11 +13,11 @@ import java.util.List;
 public enum OdemeDurumu {
     BASARILI("Başarılı"),
     BEKLIYOR("Bekliyor"),
-    IPTAL("İptal Edildi");
+    IPTAL_EDILDI("İptal Edildi");
     private final String label;
 
     public static List<EnumRecord> odemeDurumEnumList() {
-        return Arrays.stream(Birim.values()).map(deger -> new EnumRecord(deger.name(), deger.getLabel())).toList();
+        return Arrays.stream(OdemeDurumu.values()).map(deger -> new EnumRecord(deger.name(), deger.getLabel())).toList();
     }
 
 

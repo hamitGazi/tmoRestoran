@@ -1,13 +1,12 @@
 package hamit.demir.repository.personel;
 
-import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.dto.personel.PersonelResponse;
+import hamit.demir.model.dto.personel.PersonelAllResponse;
 
 import java.util.List;
 
 public interface PersonelRepositoryCustom {
 
-    List<PersonelResponse> fetchAllPersonel();
+    List<PersonelAllResponse> fetchAllPersonel();
 
-    PersonelResponse fetchPersonelById(Long id);
+    PersonelAllResponse fetchPersonelById(Long id);
 }

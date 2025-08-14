@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public record MusteriGeriBildirimResponse(
         Long id,
-        ProjeIdAdRecord siparis,
+        String siparis,
         Integer puan,
         String yorum,
         String musteriAd,

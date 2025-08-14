@@ -4,8 +4,8 @@ public class BaseException extends RuntimeException {
     BaseException() {
     }
 
-    public BaseException(GenericRespose genericRespose) {
-        super(genericRespose.message());
+    public BaseException(GenericResponse genericResponse) {
+        super(genericResponse.message());
     }
 
 }

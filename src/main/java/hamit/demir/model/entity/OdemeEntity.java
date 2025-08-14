@@ -1,11 +1,16 @@
 package hamit.demir.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="odemeler",schema = "alakart")
 public class OdemeEntity {
     @Id
@@ -21,7 +26,7 @@ public class OdemeEntity {
      * Ödenen toplam tutar.
      */
     @Column(name="tutar")
-    private Double tutar;
+    private BigDecimal toplamTutar;
 
     /**
      * Ödeme yöntemi.
@@ -33,7 +38,7 @@ public class OdemeEntity {
      * Ödeme zamanı.
      */
 
-    @Column(name = "odemeZamani", nullable = false)
+    @Column(name = "odemeZamani")
     private LocalDateTime odemeZamani;
 
     @Enumerated(EnumType.STRING)

@@ -1,51 +1,54 @@
 package hamit.demir.controller;
 
 import hamit.demir.model.dto.enumlar.EnumRecord;
-import hamit.demir.model.dto.siparis.SiparisResponse;
+import hamit.demir.model.dto.siparis.SiparisAllResponse;
 import hamit.demir.model.dto.siparis.SiparisSaveRequest;
 import hamit.demir.model.dto.siparis.SiparisUpdateRequest;
 import hamit.demir.model.entity.SiparisDurumu;
 import hamit.demir.service.siparis.SiparisService;
-import hamit.demir.utils.GenericRespose;
+import hamit.demir.utils.GenericResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("siparis")
 @RequiredArgsConstructor
 public class SiparisController {
 
     private final SiparisService siparisService;
-    @GetMapping("durum-enum")
-    public GenericRespose<List<EnumRecord>> getAllDurumEnum() {
+    @GetMapping("siparisDurum-enum")
+    public GenericResponse<List<EnumRecord>> getAllDurumEnum() {
 
         List<EnumRecord> enumRecords = SiparisDurumu.siprisDurumEnumList();
-        return GenericRespose.ok(enumRecords);
+        return GenericResponse.ok(enumRecords);
     }
 
     @GetMapping("all")
-    public GenericRespose<List<SiparisResponse>> getAllSiparisler() {
-        List<SiparisResponse> allSiparisler = siparisService.getAllSiparisler();
-        return GenericRespose.ok(allSiparisler);
+    public GenericResponse<List<SiparisAllResponse>> getAllSiparisler() {
+        List<SiparisAllResponse> allSiparisler = siparisService.getAllSiparisler();
+        return GenericResponse.ok(allSiparisler);
     }
     @GetMapping("/{id}")
-    public SiparisResponse getSiparis(@PathVariable Long id) {
-        return siparisService.getSiparisById(id);
+    public GenericResponse<SiparisAllResponse> getSiparis(@PathVariable Long id) {
+
+        SiparisAllResponse siparisById = siparisService.getSiparisById(id);
+        return GenericResponse.ok(siparisById);
     }
+
     @PostMapping("save")
-    public GenericRespose<Long> saveSiparis(@Valid @RequestBody SiparisSaveRequest request) {
+    public GenericResponse<Long> saveSiparis(@Valid @RequestBody SiparisSaveRequest request) {
         Long id = siparisService.saveSiparis(request);
-        return GenericRespose.ok(id);
+        return GenericResponse.ok(id);
     }
 
     @PutMapping("update")
-    public GenericRespose<Long> updateSiparis(@Valid @RequestBody SiparisUpdateRequest request) {
+    public GenericResponse<Long> updateSiparis(@Valid @RequestBody SiparisUpdateRequest request) {
 
         Long id = siparisService.updateSiparis(request);
-        return GenericRespose.ok(id);
+        return GenericResponse.ok(id);
     }
 
     @DeleteMapping("/{id}")
@@ -54,3 +57,12 @@ public class SiparisController {
     }
 
 }
+
+
+/*
+@PostMapping("/musteri/save")
+public ResponseEntity<Long> saveMusteriSiparis(@RequestBody SiparisSaveRequest request, Principal principal) {
+    String kullaniciAdi = principal.getName(); // JWT'den gelen müşteri adı
+    Long siparisId = siparisService.saveSiparis(request, kullaniciAdi);
+    return ResponseEntity.ok(siparisId);
+}*/
