@@ -68,6 +68,7 @@ public class OdemeRepositoryCustomImpl extends QuerydslRepositorySupport impleme
 
     @Override
     public OdemeEntity fethOdemeBYSiparisId(Long id) {
+
         QOdemeEntity root = QOdemeEntity.odemeEntity;
         return from(root).select(Projections.constructor(OdemeEntity.class,
                         root.id,

@@ -21,13 +21,14 @@ public class SiparisKalemiEntity {
     /**
      * Hangi siparişe ait olduğu.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private SiparisEntity siparis;
 
     /**
      * Sipariş edilen ürün.
      */
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private MenuItemEntity menuItem;
 
     /**

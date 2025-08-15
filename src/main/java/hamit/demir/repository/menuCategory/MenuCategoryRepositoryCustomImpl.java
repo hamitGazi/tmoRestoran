@@ -40,6 +40,6 @@ public class MenuCategoryRepositoryCustomImpl extends QuerydslRepositorySupport 
                 root.aktif,
                 root.olusturmaTarih,
                 root.guncelemeTarih
-                )).fetch();
+                )).orderBy(root.menuSira.asc()).fetch();
     }
 }

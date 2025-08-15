@@ -9,7 +9,9 @@ public record StokKalemiResponse(
         Long id,
         String ad,
         BigDecimal miktar,
+        BigDecimal kritikMiktar,
         Birim birim,
+        String aciklama,
         Boolean aktif,
         LocalDateTime olusturmaTarih,
         LocalDateTime guncelleTarih

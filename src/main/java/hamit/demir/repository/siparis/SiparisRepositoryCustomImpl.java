@@ -6,6 +6,7 @@ import hamit.demir.model.dto.masa.MasaIdKodResponse;
 import hamit.demir.model.dto.menuItem.ProjeIdAdRecord;
 import hamit.demir.model.dto.personel.PersonelIdAdResponse;
 import hamit.demir.model.dto.siparis.SiparisAllResponse;
+import hamit.demir.model.dto.siparisKalemi.SiparisKalemiResponse;
 import hamit.demir.model.entity.QMasaEntity;
 import hamit.demir.model.entity.QPersonelEntity;
 import hamit.demir.model.entity.QSiparisEntity;
@@ -59,4 +60,7 @@ public class SiparisRepositoryCustomImpl extends QuerydslRepositorySupport imple
                 root.siparisDurumu,
                 root.siparisNot)).where(root.id.eq(id)).fetchOne();
     }
+
+
+
 }

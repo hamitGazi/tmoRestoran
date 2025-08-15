@@ -21,11 +21,14 @@ public class SiparisEntity {
     /**
      * Siparişin hangi masaya ait olduğu.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private MasaEntity masa;
 
     @Column(name = "musteri_adi")
     private String musteriAd;
+
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "siparis",orphanRemoval = true)
+    private OdemeEntity odeme;
 
     @Column(name = "toplam_tutar")
     private BigDecimal toplamTutar;

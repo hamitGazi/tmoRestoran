@@ -15,4 +15,6 @@ public interface SiparisKalemRepositoryCustom {
     List<SiparisKalemiEntity> fetchSiparisKalemiListBySiparisId(@NotNull Long aLong);
 
     List<SiparisKalemiResponse> fetchKalemlerBySiparisId(Long id);
+
+    List<SiparisKalemiResponse> fetchKalemlerByMasaId(Long id);
 }

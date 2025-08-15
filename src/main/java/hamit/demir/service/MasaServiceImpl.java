@@ -3,6 +3,7 @@ package hamit.demir.service;
 import hamit.demir.model.dto.masa.MasaResponse;
 import hamit.demir.model.dto.masa.MasaSaveRequest;
 import hamit.demir.model.dto.masa.MasaUpdateRequest;
+import hamit.demir.model.entity.MasaDurumu;
 import hamit.demir.model.entity.MasaEntity;
 import hamit.demir.repository.MasaRepository;
 import hamit.demir.utils.BaseException;
@@ -39,6 +40,7 @@ public class MasaServiceImpl implements MasaService {
         masaEntity.setQrKodUrl(request.qrKodUrl());
         masaEntity.setKapasite(request.kapasite());
         masaEntity.setMasaKonum(request.masaKonum());
+        masaEntity.setMasaDurum(MasaDurumu.AKTIF);
         masaEntity.setOlusturmaTarih(LocalDateTime.now());
         return masaRepository.save(masaEntity).getId();
     }

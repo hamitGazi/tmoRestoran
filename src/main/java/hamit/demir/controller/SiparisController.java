@@ -51,7 +51,7 @@ public class SiparisController {
         return GenericResponse.ok(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public String deleteSiparis(@PathVariable Long id) {
         return siparisService.deleteSiparis(id);
     }

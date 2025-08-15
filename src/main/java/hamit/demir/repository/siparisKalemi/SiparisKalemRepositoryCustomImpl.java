@@ -114,4 +114,31 @@ public class SiparisKalemRepositoryCustomImpl extends QuerydslRepositorySupport 
                         root.kalemNot
                 )).where(root.siparis.id.eq(id)).fetch();
     }
+
+    @Override
+    public List<SiparisKalemiResponse> fetchKalemlerByMasaId(Long id) {
+        QSiparisKalemiEntity root = QSiparisKalemiEntity.siparisKalemiEntity;
+        QMenuItemEntity menuItem = QMenuItemEntity.menuItemEntity;
+        QSiparisEntity siparis = QSiparisEntity.siparisEntity;
+        QMasaEntity masa = QMasaEntity.masaEntity;
+        List<SiparisKalemiResponse> fetch = from(root).leftJoin(root.siparis, siparis).leftJoin(root.menuItem, menuItem).leftJoin(siparis.masa, masa)
+                .select(Projections.constructor(SiparisKalemiResponse.class,
+                        root.id,
+                        Projections.constructor(MasaIdKodResponse.class,
+                                masa.id,
+                                masa.qrKodUrl),
+                        root.siparis.id,
+                        Projections.constructor(ProjeIdAdRecord.class,
+                                menuItem.id,
+                                menuItem.ad),
+
+                        root.adet,
+                        root.birimFiyat,
+                        root.toplamFiyat,
+                        root.ekOzellikler,
+                        siparis.siparisDurumu,
+                        root.kalemNot
+                )).where(masa.id.eq(id).and(masa.masaDurum.eq(MasaDurumu.AKTIF))).fetch();
+        return fetch;
+    }
 }

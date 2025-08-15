@@ -31,8 +31,8 @@ public class StokKalemiEntity {
     @Column(name = "miktar", nullable = false)
     private BigDecimal miktar;
 
-    @Column(name = "kiritik-miktar", nullable = false)
-    private BigDecimal kiritikMiktar;
+    @Column(name = "kritik-miktar", nullable = false)
+    private BigDecimal kritikMiktar;
 
     /**
      * Birim (örnek: KG, ADET, LITRE).
@@ -40,9 +40,8 @@ public class StokKalemiEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "birim", nullable = false)
     private Birim birim;
-    /**
-     * Aktif mi? (stokta kullanılabilir mi).
-     */
+    @Column(name="aciklama",columnDefinition = "TEXT")
+    private String aciklama;
     private Boolean aktif;
 
 

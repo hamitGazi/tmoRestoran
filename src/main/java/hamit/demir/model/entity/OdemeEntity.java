@@ -20,7 +20,7 @@ public class OdemeEntity {
      * Ödeme hangi sipariş için yapıldı.
      */
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private SiparisEntity siparis;
     /**
      * Ödenen toplam tutar.

@@ -24,10 +24,12 @@ public class StokKalemRepositoryCustomImpl extends QuerydslRepositorySupport imp
                 root.id,
                 root.ad,
                 root.miktar,
+                root.kritikMiktar,
                 root.birim,
+                root.aciklama,
                 root.aktif,
                 root.olusturmaTarih,
-                root.guncelleTarih)).fetch();
+                root.guncelleTarih)).where(root.aktif).fetch();
     }
 
     @Override
@@ -35,13 +37,15 @@ public class StokKalemRepositoryCustomImpl extends QuerydslRepositorySupport imp
         QStokKalemiEntity root =QStokKalemiEntity.stokKalemiEntity;
 
         return from(root).select(Projections.constructor(StokKalemiResponse.class,
-                root.id,
-                root.ad,
-                root.miktar,
-                root.birim,
-                root.aktif,
-                root.olusturmaTarih,
-                root.guncelleTarih)).
+                        root.id,
+                        root.ad,
+                        root.miktar,
+                        root.kritikMiktar,
+                        root.birim,
+                        root.aciklama,
+                        root.aktif,
+                        root.olusturmaTarih,
+                        root.guncelleTarih)).
                 where(root.id.eq(id).and(root.aktif.eq(true)))
                 .fetchOne();
     }

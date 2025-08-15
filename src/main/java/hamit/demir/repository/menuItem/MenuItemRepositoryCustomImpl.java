@@ -22,13 +22,13 @@ public class MenuItemRepositoryCustomImpl extends QuerydslRepositorySupport impl
         QMenuItemEntity root = QMenuItemEntity.menuItemEntity;
         QMenuCategoryEntity menuCategory = QMenuCategoryEntity.menuCategoryEntity;
 
-        return from(root).leftJoin(root.kategori,menuCategory).select(Projections.constructor(MenuItemResponse.class,
+        return from(root).leftJoin(root.kategori, menuCategory).select(Projections.constructor(MenuItemResponse.class,
                 root.id,
                 root.ad,
                 root.aciklama,
                 Projections.constructor(ProjeIdAdRecord.class,
-                menuCategory.id,
-                menuCategory.ad),
+                        menuCategory.id,
+                        menuCategory.ad),
                 root.aktif,
                 root.resimYolu,
                 root.ekOzellikler,
@@ -42,7 +42,7 @@ public class MenuItemRepositoryCustomImpl extends QuerydslRepositorySupport impl
         QMenuItemEntity root = QMenuItemEntity.menuItemEntity;
         QMenuCategoryEntity menuCategory = QMenuCategoryEntity.menuCategoryEntity;
 
-        return from(root).leftJoin(root.kategori,menuCategory).select(Projections.constructor(MenuItemResponse.class,
+        return from(root).leftJoin(root.kategori, menuCategory).select(Projections.constructor(MenuItemResponse.class,
                 root.id,
                 root.ad,
                 root.aciklama,
@@ -63,21 +63,24 @@ public class MenuItemRepositoryCustomImpl extends QuerydslRepositorySupport impl
         QMenuCategoryEntity menuCategory = QMenuCategoryEntity.menuCategoryEntity;
         QMenuFiyatEntity menuFiyat = QMenuFiyatEntity.menuFiyatEntity;
 
-        return from(root).leftJoin(root.kategori,menuCategory).
+        return from(root).leftJoin(root.kategori, menuCategory).
                 leftJoin(menuFiyat).on(menuFiyat.menuItem.id.eq(root.id)).
                 select(Projections.constructor(MenuItemByCategoryIdResponse.class,
-                root.id,
-                root.ad,
-                root.aciklama,
-                menuFiyat.fiyat,
-                Projections.constructor(ProjeIdAdRecord.class,
-                        menuCategory.id,
-                        menuCategory.ad),
-                root.aktif,
-                root.resimYolu,
-                root.ekOzellikler,
-                root.olusturmaTarih,
-                root.guncelemeTarih
-        )).where(root.kategori.id.eq(categoryId).and(root.aktif.eq(true))).fetch();
+                        root.id,
+                        root.ad,
+                        root.aciklama,
+                        menuFiyat.fiyat,
+                        Projections.constructor(ProjeIdAdRecord.class,
+                                menuCategory.id,
+                                menuCategory.ad),
+                        root.aktif,
+                        root.resimYolu,
+                        root.ekOzellikler,
+                        root.olusturmaTarih,
+                        root.guncelemeTarih
+                )).where(root.kategori.id.eq(categoryId).and(root.aktif.eq(true))).fetch();
     }
+
+
+
 }

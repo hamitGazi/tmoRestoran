@@ -26,4 +26,8 @@ public interface SiparisKalemiService {
    List< SiparisKalemiResponse> getKalemlerBySiparisId(Long id);
 
     Long updateSiparisKalemi(@Valid SiparisKalemiUpdateRequest request);
+
+    List<SiparisKalemiResponse> getKalemlerByMasaId(Long id);
+
+    String deleteSiparisKalem(Long id);
 }

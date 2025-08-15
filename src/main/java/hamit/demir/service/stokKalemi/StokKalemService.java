@@ -17,5 +17,12 @@ public interface StokKalemService {
     Long updateStokKalem(StokKalemiUpdateRequest request);
 
 
+    void checkStockAvailability(Long menuItemId, int adet);
 
+    void decreaseStockForOrder(Long siparisId);
+
+    void restoreStockForOrder(Long siparisId);
+
+
+    String deleteStokKalem(Long id);
 }

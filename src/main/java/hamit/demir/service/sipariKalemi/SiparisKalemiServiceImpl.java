@@ -3,7 +3,6 @@ package hamit.demir.service.sipariKalemi;
 import hamit.demir.model.dto.siparisKalemi.SiparisKalemiResponse;
 import hamit.demir.model.dto.siparisKalemi.SiparisKalemiSaveRequest;
 import hamit.demir.model.dto.siparisKalemi.SiparisKalemiUpdateRequest;
-import hamit.demir.model.entity.MenuFiyatEntity;
 import hamit.demir.model.entity.SiparisKalemiEntity;
 import hamit.demir.repository.menuFiyat.MenuFiyatRepository;
 import hamit.demir.repository.menuItem.MenuItemRepository;
@@ -42,7 +41,7 @@ public class SiparisKalemiServiceImpl implements SiparisKalemiService {
     @Override
     public Long saveSiparisKalemi(SiparisKalemiSaveRequest request) {
         SiparisKalemiEntity entity = new SiparisKalemiEntity();
-        BigDecimal menuFiyat= menuFiyatRepository.fetchMenuItemFiyat(request.menuItem());
+        BigDecimal menuFiyat = menuFiyatRepository.fetchMenuItemFiyat(request.menuItem());
         entity.setSiparis(siparisRepository.getReferenceById(request.siparis()));
         entity.setMenuItem(menuItemRepository.getReferenceById(request.menuItem()));
         entity.setAdet(request.adet());
@@ -76,7 +75,7 @@ public class SiparisKalemiServiceImpl implements SiparisKalemiService {
         SiparisKalemiEntity entity = siparisKalemiRepository.findById(request.id())
                 .orElseThrow(() -> new BaseException(
                         GenericResponse.error("SiparisKalemi Bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
-         BigDecimal menuFiyat= menuFiyatRepository.fetchMenuItemFiyat(request.menuItem());
+        BigDecimal menuFiyat = menuFiyatRepository.fetchMenuItemFiyat(request.menuItem());
         entity.setSiparis(siparisRepository.getReferenceById(request.siparis()));
         entity.setMenuItem(menuItemRepository.getReferenceById(request.menuItem()));
         entity.setAdet(request.adet());
@@ -88,6 +87,19 @@ public class SiparisKalemiServiceImpl implements SiparisKalemiService {
         return siparisKalemiRepository.save(entity).getId();
 
 
+    }
+
+    @Override
+    public List<SiparisKalemiResponse> getKalemlerByMasaId(Long id) {
+        return siparisKalemiRepository.fetchKalemlerByMasaId(id);
+    }
+
+    @Override
+    public String deleteSiparisKalem(Long id) {
+        SiparisKalemiEntity siparisKalemiEntity = siparisKalemiRepository.findById(id).orElseThrow(() -> new BaseException(
+                GenericResponse.error("Siparis kalemi bulunamadı! Lütfen tekrar deneyiniz..", HttpStatus.NOT_FOUND.toString())));
+        siparisKalemiRepository.deleteById(siparisKalemiEntity.getId());
+        return "Silme işlemi başarılı";
     }
 
 

@@ -1,6 +1,8 @@
 package hamit.demir.model.dto.StokKalemi;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hamit.demir.model.entity.Birim;
+import hamit.demir.model.entity.IslemTipEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -12,6 +14,9 @@ public record StokKalemiUpdateRequest(
         @NotBlank String ad,
         @NotNull BigDecimal miktar,
         @NotNull Birim birim,
-        @NotNull Boolean aktif
+        @NotNull Boolean aktif,
+        BigDecimal kritikMiktar,
+        @JsonProperty("islemTip") IslemTipEnum islemTip,
+        String aciklama // Opsiyonel, hareket için açıklama
 ) {
 }

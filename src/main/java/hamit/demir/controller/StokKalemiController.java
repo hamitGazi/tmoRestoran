@@ -50,12 +50,17 @@ public class StokKalemiController {
 
     @PutMapping("update")
     public GenericResponse<Long> updateStokKalem(@Valid @RequestBody StokKalemiUpdateRequest request) {
-
         Long id = stokKalemService.updateStokKalem(request);
         return GenericResponse.ok(id);
     }
 
 
-
-
+    @DeleteMapping("delete/{id}")
+    public GenericResponse<String> deleteStokKalemi(@PathVariable Long id) {
+        String str = stokKalemService.deleteStokKalem(id);
+        return GenericResponse.ok(str);
+    }
 }
+
+
+

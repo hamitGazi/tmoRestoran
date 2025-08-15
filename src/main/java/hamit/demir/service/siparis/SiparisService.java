@@ -20,4 +20,5 @@ public interface SiparisService {
     String deleteSiparis(Long id);
 
     void siparisOdmeAndUpdateStok(Long odemeId);
+
 }

@@ -10,7 +10,9 @@ public record StokKalemiSaveRequest (
         @NotBlank String ad,
         @NotNull BigDecimal miktar,
         @NotNull Birim birim,
-        @NotNull Boolean aktif
+        @NotNull Boolean aktif,
+        BigDecimal kritikMiktar,
+        String aciklama
 
 
 ){

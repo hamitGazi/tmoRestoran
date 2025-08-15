@@ -3,6 +3,7 @@ package hamit.demir.repository.menuItem;
 import hamit.demir.model.dto.masa.MasaResponse;
 import hamit.demir.model.dto.menuItem.MenuItemByCategoryIdResponse;
 import hamit.demir.model.dto.menuItem.MenuItemResponse;
+import hamit.demir.model.entity.MenuItemReceteEntity;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
@@ -15,6 +16,9 @@ public interface MenuItemRepositoryCustom {
     MenuItemResponse fetchMenuItemById(Long id);
 
     List<MenuItemByCategoryIdResponse> fetchMenuItemByMenuCategoryId(Long id);
+
+
+
 
 
 }
