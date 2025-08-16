@@ -5,6 +5,8 @@ import hamit.demir.model.dto.odeme.OdemeSaveRequest;
 import hamit.demir.model.dto.odeme.OdemeUpdateRequest;
 import hamit.demir.model.entity.OdemeDurumu;
 import hamit.demir.model.entity.OdemeEntity;
+import hamit.demir.model.entity.SiparisDurumu;
+import hamit.demir.model.entity.SiparisEntity;
 import hamit.demir.repository.odeme.OdemeRepository;
 import hamit.demir.repository.siparis.SiparisRepository;
 import hamit.demir.service.siparis.SiparisService;
@@ -136,6 +138,9 @@ public class OdemeServiceImpl implements OdemeService {
         OdemeEntity entity = odemeRepository.findById(request.id())
                 .orElseThrow(() -> new BaseException(
                         GenericResponse.error("Ödeme bulunamadı!", HttpStatus.NOT_FOUND.toString())));
+        SiparisEntity siparisEntity= siparisRepository.findById(request.id())
+                .orElseThrow(() -> new BaseException(
+                        GenericResponse.error("Ödeme bulunamadı!", HttpStatus.NOT_FOUND.toString())));
 
         if (entity.getOdemeDurum() == OdemeDurumu.BASARILI) {
             throw new BaseException(
@@ -151,11 +156,13 @@ public class OdemeServiceImpl implements OdemeService {
         entity.setToplamTutar(request.toplamTutar());
         entity.setYontemi(request.odemeYontem());
         entity.setOdemeDurum(request.odemeDurum());
-        entity.setSiparis(siparisRepository.getReferenceById(request.siparis()));
+        entity.setSiparis(siparisEntity);
         entity.setOdemeZamani(request.odemeZaman());
         OdemeEntity savedEntity = odemeRepository.save(entity);
 
         if (request.odemeDurum() == OdemeDurumu.BASARILI) {
+            siparisEntity.setSiparisDurumu(SiparisDurumu.TAMAMLANDI);
+            siparisRepository.save(siparisEntity);
             stokKalemService.decreaseStockForOrder(savedEntity.getSiparis().getId());
         } else if (request.odemeDurum() == OdemeDurumu.IPTAL_EDILDI) {
             stokKalemService.restoreStockForOrder(savedEntity.getSiparis().getId());

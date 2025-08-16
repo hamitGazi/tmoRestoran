@@ -289,6 +289,11 @@ public class SiparisServiceImpl implements SiparisService {
         SiparisEntity entity = siparisRepository.findById(request.id())
                 .orElseThrow(() -> new BaseException(
                         GenericResponse.error("Sipariş bulunamadı!", HttpStatus.NOT_FOUND.toString())));
+        if (siparisRepository.existsByIdAndOdeme_OdemeDurum(request.id(), OdemeDurumu.BASARILI)) {
+            throw new BaseException(
+                    GenericResponse.error("Ödemesi tamamlanmış sipariş güncellenemez!", HttpStatus.BAD_REQUEST.toString())
+            );
+        }
         entity.setMasa(request.masa() != null ? masaRepository.getReferenceById(request.masa()) : null);
         entity.setPersonel(request.personel() != null ? personelRepository.getReferenceById(request.personel()) : null);
         entity.setMusteriAd(request.musteriAd());
