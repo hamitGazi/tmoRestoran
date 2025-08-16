@@ -38,6 +38,11 @@ public class MasaController {
         return GenericResponse.ok(allMasalar);
     }
 
+    @GetMapping("notRezervasyon")
+    public GenericResponse< List<MasaResponse>> getMasaByNotRezervasyon() {
+        List<MasaResponse> allMasalar = masaService.getMasaByNotRezervasyon();
+        return GenericResponse.ok(allMasalar);
+    }
     @GetMapping("/{id}")
     public GenericResponse<MasaResponse> getMasaById(@PathVariable Long id) {
         MasaResponse masaById = masaService.getMasaById(id);

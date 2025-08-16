@@ -41,7 +41,7 @@ public class MenuIFiyatController {
         return GenericResponse.ok(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public GenericResponse<String> deleteMenuFiyat(@PathVariable Long id) {
 
         String str = menuFiyatService.deleteMenuFiyat(id);

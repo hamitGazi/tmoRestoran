@@ -17,4 +17,6 @@ public interface MasaService {
     Long updateMasa( MasaUpdateRequest request);
 
     String deleteMasa(Long id);
+
+    List<MasaResponse> getMasaByNotRezervasyon();
 }

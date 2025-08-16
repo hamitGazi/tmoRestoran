@@ -65,4 +65,10 @@ public class MasaServiceImpl implements MasaService {
         masaRepository.deleteById(masaEntity.getId());
         return "Silme işlemi başarılı";
     }
+
+    @Override
+    public List<MasaResponse> getMasaByNotRezervasyon() {
+         return  masaRepository.fetchMasaByNotRezervasyon();
+
+    }
 }

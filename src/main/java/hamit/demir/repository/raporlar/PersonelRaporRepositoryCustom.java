@@ -1,11 +1,11 @@
 package hamit.demir.repository.raporlar;
 
-import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.dto.raporlar.PersonelRaporFilterResponse;
+import hamit.demir.model.dto.raporlar.personleRapor.PersonelRaporFilterRequest;
+import hamit.demir.model.dto.raporlar.personleRapor.PersonelRaporFilterResponse;
 
 import java.util.List;
 
 public interface PersonelRaporRepositoryCustom {
 
-    List<PersonelRaporFilterResponse> fetchPersonelRaporlari(PersonelRaporFilterResponse filter);
+    List<PersonelRaporFilterResponse> fetchPersonelRaporlari(PersonelRaporFilterRequest filter);
 }

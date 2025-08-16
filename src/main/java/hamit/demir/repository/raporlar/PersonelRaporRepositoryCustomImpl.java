@@ -1,8 +1,10 @@
 package hamit.demir.repository.raporlar;
 
 import com.querydsl.core.types.Projections;
-import hamit.demir.model.dto.enumlar.EnumRecord;
-import hamit.demir.model.dto.raporlar.PersonelRaporFilterResponse;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.NumberExpression;
+import hamit.demir.model.dto.raporlar.personleRapor.PersonelRaporFilterRequest;
+import hamit.demir.model.dto.raporlar.personleRapor.PersonelRaporFilterResponse;
 import hamit.demir.model.entity.*;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
@@ -15,19 +17,24 @@ public class PersonelRaporRepositoryCustomImpl extends QuerydslRepositorySupport
 
 
     @Override
-    public List<PersonelRaporFilterResponse> fetchPersonelRaporlari(PersonelRaporFilterResponse filter) {
+    public List<PersonelRaporFilterResponse> fetchPersonelRaporlari(PersonelRaporFilterRequest filter) {
         QPersonelEntity root = QPersonelEntity.personelEntity;
         QSiparisEntity siparis = QSiparisEntity.siparisEntity;
+        NumberExpression<Integer> gecenSureExpr = Expressions.numberTemplate(Integer.class,
+                "function('datediff', {0}, {1})",
+                siparis.guncelleZamani,
+                siparis.olusturmaZamani
+        );
 
         var query = from(root)
                 .leftJoin(siparis).on(siparis.personel.id.eq(root.id))
                 .select(Projections.constructor(PersonelRaporFilterResponse.class,
                         root.id,
                         root.ad.concat(" ").concat(root.soyad),
-                        new EnumRecord(root.rol.name(), root.rol.getLabel()),
+                        root.rol,//PersonelRolEnum
                         siparis.id.count().intValue(),
-                        siparis.toplamTutar.sum(),
-                        siparis.guncelleZamani.subtract(siparis.olusturmaZamani).castToNum(Integer.class)
+                        siparis.toplamTutar.sumBigDecimal(),
+                        gecenSureExpr
                 ))
                 .groupBy(root.id);
 

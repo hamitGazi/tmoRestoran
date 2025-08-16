@@ -1,8 +1,8 @@
 package hamit.demir.repository.raporlar;
 
 import com.querydsl.core.types.Projections;
-import hamit.demir.model.dto.enumlar.EnumRecord;
-import hamit.demir.model.dto.raporlar.SatisRaporFilterResponse;
+import hamit.demir.model.dto.raporlar.satisRapor.SatisRaporFilterRequest;
+import hamit.demir.model.dto.raporlar.satisRapor.SatisRaporFilterResponse;
 import hamit.demir.model.entity.OdemeYontem;
 import hamit.demir.model.entity.QOdemeEntity;
 import hamit.demir.model.entity.QSiparisEntity;
@@ -17,7 +17,7 @@ public class SatisRaporRepositoryCustomImpl extends QuerydslRepositorySupport im
     }
 
     @Override
-    public List<SatisRaporFilterResponse> fetchSatisRaporlari(SatisRaporFilterResponse filter) {
+    public List<SatisRaporFilterResponse> fetchSatisRaporlari(SatisRaporFilterRequest filter) {
         QSiparisEntity root = QSiparisEntity.siparisEntity;
         QOdemeEntity odeme = QOdemeEntity.odemeEntity;
 
@@ -25,8 +25,9 @@ public class SatisRaporRepositoryCustomImpl extends QuerydslRepositorySupport im
                 .leftJoin(root.odeme, odeme)
                 .select(Projections.constructor(SatisRaporFilterResponse.class,
                         root.id,
-                        root.olusturmaZamani.asString(),
-                        new EnumRecord(odeme.yontemi.name(), odeme.yontemi.getLabel()),
+                        root.olusturmaZamani,
+                         odeme.yontemi,//odemeYontem
+
                         root.toplamTutar,
                         root.id.count().intValue()
                 ))

@@ -8,4 +8,6 @@ public interface MasaRepositoryCustom {
     List<MasaResponse> fetchAllMasalar();
 
     MasaResponse fetchMasaById(Long id);
+
+    List<MasaResponse> fetchMasaByNotRezervasyon();
 }

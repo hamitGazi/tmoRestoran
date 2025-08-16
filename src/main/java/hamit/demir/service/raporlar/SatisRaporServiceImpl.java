@@ -1,7 +1,7 @@
 package hamit.demir.service.raporlar;
 
-import hamit.demir.model.dto.enumlar.EnumRecord;
-import hamit.demir.model.dto.raporlar.SatisRaporFilterResponse;
+import hamit.demir.model.dto.raporlar.satisRapor.SatisRaporFilterRequest;
+import hamit.demir.model.dto.raporlar.satisRapor.SatisRaporFilterResponse;
 import hamit.demir.repository.raporlar.SatisRaporRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class SatisRaporServiceImpl implements SatisRaporService {
     private final SatisRaporRepository satisRepository;
 
     @Override
-    public List<SatisRaporFilterResponse> getSatisRaporlari(SatisRaporFilterResponse filter) {
+    public List<SatisRaporFilterResponse> getSatisRaporlari(SatisRaporFilterRequest filter) {
         return satisRepository.fetchSatisRaporlari(filter);
     }
 

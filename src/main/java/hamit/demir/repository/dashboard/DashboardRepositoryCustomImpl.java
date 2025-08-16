@@ -30,8 +30,9 @@ public class DashboardRepositoryCustomImpl extends QuerydslRepositorySupport imp
                 .fetchOne();
 
         Long aktifMasalar = from(masa)
-                .where(masa.masaDurum.eq(MasaDurumu.AKTIF))
-                .select(masa.id.count())
+                .join(siparis).on(siparis.masa.id.eq(masa.id)) // inner join ile sadece siparişi olan masalar
+                .where(siparis.siparisDurumu.in(SiparisDurumu.BEKLIYOR, SiparisDurumu.HAZIRLANIYOR, SiparisDurumu.SERVIS_EDILDI))
+                .select(masa.id.countDistinct()) // aynı masayı birden fazla siparişten dolayı saymamak için countDistinct
                 .fetchOne();
 
         Long bekleyenRezervasyonlar = from(masa)

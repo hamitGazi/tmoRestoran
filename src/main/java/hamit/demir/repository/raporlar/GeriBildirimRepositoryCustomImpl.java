@@ -1,8 +1,8 @@
 package hamit.demir.repository.raporlar;
 
 import com.querydsl.core.types.Projections;
-import hamit.demir.model.dto.enumlar.EnumRecord;
-import hamit.demir.model.dto.raporlar.GeriBildirimRaporFilterResponse;
+import hamit.demir.model.dto.raporlar.geriBildirim.GeriBildirimRaporFilterRequest;
+import hamit.demir.model.dto.raporlar.geriBildirim.GeriBildirimRaporFilterResponse;
 import hamit.demir.model.entity.*;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
@@ -14,14 +14,14 @@ public class GeriBildirimRepositoryCustomImpl extends QuerydslRepositorySupport 
     }
 
     @Override
-    public List<GeriBildirimRaporFilterResponse> fetchGeriBildirimRaporlari(GeriBildirimRaporFilterResponse filter) {
+    public List<GeriBildirimRaporFilterResponse> fetchGeriBildirimRaporlari(GeriBildirimRaporFilterRequest filter) {
         QMusteriGeriBildirimEntity root = QMusteriGeriBildirimEntity.musteriGeriBildirimEntity;
 
         var query = from(root)
                 .select(Projections.constructor(GeriBildirimRaporFilterResponse.class,
                         root.id,
-                        root.olusturmaTarih.asString(),
-                        new EnumRecord(root.geriBildirimTur.name(), root.geriBildirimTur.getLabel()),
+                        root.olusturmaTarih,
+                        root.geriBildirimTur.as("geriBildirimTuru"),
                         root.puan,
                         root.yorum
                 ));

@@ -1,11 +1,11 @@
-package hamit.demir.model.dto.raporlar;
+package hamit.demir.model.dto.raporlar.stokKalem;
 
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public record GeriBildirimRaporFilterResponse(
+public record StokRaporFilterRequest(
         @NotNull LocalDateTime gecerlilikBaslangic,
         @NotNull LocalDateTime gecerlilikBitis,
-        String geriBildirimTuru
+        String islemTipi
 ) {}

@@ -1,9 +1,7 @@
 package hamit.demir.service.raporlar;
 
-import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.dto.masa.MasaSaveRequest;
-import hamit.demir.model.dto.masa.MasaUpdateRequest;
-import hamit.demir.model.dto.raporlar.PersonelRaporFilterResponse;
+import hamit.demir.model.dto.raporlar.personleRapor.PersonelRaporFilterRequest;
+import hamit.demir.model.dto.raporlar.personleRapor.PersonelRaporFilterResponse;
 
 import java.util.List;
 
@@ -11,5 +9,5 @@ public interface PersonelRaporService {
 
 
 
-    List<PersonelRaporFilterResponse> getPersonelRaporlari(PersonelRaporFilterResponse filter);
+    List<PersonelRaporFilterResponse> getPersonelRaporlari(PersonelRaporFilterRequest filter);
 }

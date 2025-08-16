@@ -26,11 +26,14 @@ public class SiparisController {
         return GenericResponse.ok(enumRecords);
     }
 
+
     @GetMapping("all")
     public GenericResponse<List<SiparisAllResponse>> getAllSiparisler() {
         List<SiparisAllResponse> allSiparisler = siparisService.getAllSiparisler();
         return GenericResponse.ok(allSiparisler);
     }
+
+
     @GetMapping("/{id}")
     public GenericResponse<SiparisAllResponse> getSiparis(@PathVariable Long id) {
 

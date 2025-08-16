@@ -2,14 +2,16 @@ package hamit.demir.repository.menuFiyat;
 
 import com.querydsl.core.types.Projections;
 import hamit.demir.model.dto.menuFiyat.MenuFiyatAllResponse;
-import hamit.demir.model.dto.menuFiyat.MenuFiyatResponse;
 import hamit.demir.model.dto.menuItem.ProjeIdAdRecord;
-import hamit.demir.model.entity.*;
+import hamit.demir.model.entity.MenuFiyatEntity;
+import hamit.demir.model.entity.QMenuFiyatEntity;
+import hamit.demir.model.entity.QMenuItemEntity;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+
 
 public class MenuFiyatRepositoryCustomImpl extends QuerydslRepositorySupport implements MenuFiyatRepositoryCustom {
     public MenuFiyatRepositoryCustomImpl() {
@@ -37,7 +39,7 @@ public class MenuFiyatRepositoryCustomImpl extends QuerydslRepositorySupport imp
     }
 
     @Override
-    public MenuFiyatAllResponse fetchMenuFiyatById(Long id ) {
+    public MenuFiyatAllResponse fetchMenuFiyatById(Long id) {
         QMenuFiyatEntity root = QMenuFiyatEntity.menuFiyatEntity;
         QMenuItemEntity menuItem = QMenuItemEntity.menuItemEntity;
 

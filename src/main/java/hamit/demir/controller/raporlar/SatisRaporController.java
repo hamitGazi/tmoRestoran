@@ -1,19 +1,12 @@
 package hamit.demir.controller.raporlar;
 
 import hamit.demir.model.dto.enumlar.EnumRecord;
-import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.dto.masa.MasaSaveRequest;
-import hamit.demir.model.dto.masa.MasaUpdateRequest;
-import hamit.demir.model.dto.raporlar.SatisRaporFilterResponse;
-import hamit.demir.model.entity.MasaDurumu;
-import hamit.demir.model.entity.MasaKonum;
+import hamit.demir.model.dto.raporlar.satisRapor.SatisRaporFilterRequest;
+import hamit.demir.model.dto.raporlar.satisRapor.SatisRaporFilterResponse;
 import hamit.demir.model.entity.OdemeYontem;
-import hamit.demir.service.MasaService;
 import hamit.demir.service.raporlar.SatisRaporService;
 import hamit.demir.utils.GenericResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +20,7 @@ public class SatisRaporController {
     private final SatisRaporService satisRaporService;
 
     @PostMapping("/all")
-    public GenericResponse<List<SatisRaporFilterResponse>> getAll(@RequestBody SatisRaporFilterResponse filter) {
+    public GenericResponse<List<SatisRaporFilterResponse>> getAll(@RequestBody SatisRaporFilterRequest filter) {
         List<SatisRaporFilterResponse> data = satisRaporService.getSatisRaporlari(filter);
         return GenericResponse.ok(data);
     }

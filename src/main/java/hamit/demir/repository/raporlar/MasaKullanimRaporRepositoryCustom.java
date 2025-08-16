@@ -1,12 +1,12 @@
 package hamit.demir.repository.raporlar;
 
-import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.dto.raporlar.MasaKullanimRaporFilterResponse;
+import hamit.demir.model.dto.raporlar.masaKullanim.MasaKulanimRaporFilterResponse;
+import hamit.demir.model.dto.raporlar.masaKullanim.MasaKullanimRaporFilterRequest;
 
 import java.util.List;
 
 public interface MasaKullanimRaporRepositoryCustom {
 
 
-    List<MasaKullanimRaporFilterResponse> fetchMasaKullanimRaporlari(MasaKullanimRaporFilterResponse filter);
+    List<MasaKulanimRaporFilterResponse> fetchMasaKullanimRaporlari(MasaKullanimRaporFilterRequest filter);
 }

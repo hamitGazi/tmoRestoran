@@ -1,8 +1,11 @@
 package hamit.demir.repository.raporlar;
 
 import com.querydsl.core.types.Projections;
-import hamit.demir.model.dto.enumlar.EnumRecord;
-import hamit.demir.model.dto.raporlar.MasaKullanimRaporFilterResponse;
+import com.querydsl.core.types.dsl.DateTimeExpression;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.NumberExpression;
+import hamit.demir.model.dto.raporlar.masaKullanim.MasaKullanimRaporFilterRequest;
+import hamit.demir.model.dto.raporlar.masaKullanim.MasaKulanimRaporFilterResponse;
 import hamit.demir.model.entity.MasaEntity;
 import hamit.demir.model.entity.MasaKonum;
 import hamit.demir.model.entity.QMasaEntity;
@@ -18,20 +21,26 @@ public class MasaKullanimRaporRepositoryCustomImpl extends QuerydslRepositorySup
 
 
     @Override
-    public List<MasaKullanimRaporFilterResponse> fetchMasaKullanimRaporlari(MasaKullanimRaporFilterResponse filter) {
+    public List<MasaKulanimRaporFilterResponse> fetchMasaKullanimRaporlari(MasaKullanimRaporFilterRequest filter) {
         QMasaEntity root = QMasaEntity.masaEntity;
         QSiparisEntity siparis = QSiparisEntity.siparisEntity;
+        NumberExpression<Integer> gecenSureExpr = Expressions.numberTemplate(Integer.class,
+                "function('datediff', {0}, {1})",
+                siparis.guncelleZamani,
+                siparis.olusturmaZamani
+        );
 
         var query = from(root)
                 .leftJoin(siparis).on(siparis.masa.id.eq(root.id))
-                .select(Projections.constructor(MasaKullanimRaporFilterResponse.class,
+                .select(Projections.constructor(MasaKulanimRaporFilterResponse.class,
                         root.id,
-                        new EnumRecord(root.masaKonum.name(), root.masaKonum.getLabel()),
-                        siparis.guncelleZamani.subtract(siparis.olusturmaZamani).castToNum(Integer.class),
+                        root.masaKonum,
+                        gecenSureExpr,
                         siparis.id.count().intValue(),
-                        siparis.olusturmaZamani.asString()
+                        siparis.olusturmaZamani
                 ))
-                .groupBy(root.id);
+                .groupBy(root.id, root.masaKonum, siparis.guncelleZamani, siparis.olusturmaZamani);
+
 
         if (filter.gecerlilikBaslangic() != null) {
             query.where(siparis.olusturmaZamani.goe(filter.gecerlilikBaslangic()));

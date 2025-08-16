@@ -1,7 +1,8 @@
 package hamit.demir.service.raporlar;
 
-import hamit.demir.model.dto.raporlar.PersonelRaporFilterResponse;
-import hamit.demir.repository.personel.PersonelRepository;
+import hamit.demir.model.dto.raporlar.personleRapor.PersonelRaporFilterRequest;
+import hamit.demir.model.dto.raporlar.personleRapor.PersonelRaporFilterResponse;
+import hamit.demir.repository.raporlar.PersonelRaporRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,10 @@ import java.util.List;
 public class PersonelRaporServiceImpl implements PersonelRaporService {
 
 
-    private final PersonelRepository personelRepository;
+    private final PersonelRaporRepository personelRepository;
 
     @Override
-    public List<PersonelRaporFilterResponse> getPersonelRaporlari(PersonelRaporFilterResponse filter) {
+    public List<PersonelRaporFilterResponse> getPersonelRaporlari(PersonelRaporFilterRequest filter) {
         return personelRepository.fetchPersonelRaporlari(filter);
     }
 
