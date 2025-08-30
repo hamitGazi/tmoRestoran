@@ -68,6 +68,12 @@ public class MasaController {
         String str = masaService.deleteMasa(id);
         return GenericResponse.ok(str);
     }
+//personel masadurumu  kontrol bekliyor olan masaları güncelliyor.
+    @PutMapping("/{id}/durum-guncelle")
+    public GenericResponse<String> updateMasaDurumu(@PathVariable Long id, @RequestParam MasaDurumu yeniDurum) {
+        masaService.updateMasaDurumu(id, yeniDurum);
+        return GenericResponse.ok("Masa durumu güncellendi.");
+    }
 
 
 }

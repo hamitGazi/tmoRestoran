@@ -6,6 +6,7 @@ import hamit.demir.model.dto.masa.MasaUpdateRequest;
 import hamit.demir.model.entity.MasaDurumu;
 import hamit.demir.model.entity.MasaEntity;
 import hamit.demir.repository.MasaRepository;
+import hamit.demir.repository.raporlar.MasaKullanimRaporRepository;
 import hamit.demir.utils.BaseException;
 import hamit.demir.utils.GenericResponse;
 import jakarta.transaction.Transactional;
@@ -40,7 +41,7 @@ public class MasaServiceImpl implements MasaService {
         masaEntity.setQrKodUrl(request.qrKodUrl());
         masaEntity.setKapasite(request.kapasite());
         masaEntity.setMasaKonum(request.masaKonum());
-        masaEntity.setMasaDurum(MasaDurumu.AKTIF);
+        masaEntity.setMasaDurum(MasaDurumu.BOS);
         masaEntity.setOlusturmaTarih(LocalDateTime.now());
         return masaRepository.save(masaEntity).getId();
     }
@@ -70,5 +71,12 @@ public class MasaServiceImpl implements MasaService {
     public List<MasaResponse> getMasaByNotRezervasyon() {
          return  masaRepository.fetchMasaByNotRezervasyon();
 
+    }
+    @Override
+    public void updateMasaDurumu(Long masaId, MasaDurumu yeniDurum) {
+        MasaEntity masa = masaRepository.findById(masaId)
+                .orElseThrow(() -> new BaseException(GenericResponse.error("Masa bulunamadı!", HttpStatus.NOT_FOUND.toString())));
+        masa.setMasaDurum(yeniDurum);
+        masaRepository.save(masa);
     }
 }

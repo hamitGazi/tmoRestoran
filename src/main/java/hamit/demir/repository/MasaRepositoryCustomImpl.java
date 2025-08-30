@@ -2,9 +2,7 @@ package hamit.demir.repository;
 
 import com.querydsl.core.types.Projections;
 import hamit.demir.model.dto.masa.MasaResponse;
-import hamit.demir.model.entity.MasaDurumu;
-import hamit.demir.model.entity.MasaEntity;
-import hamit.demir.model.entity.QMasaEntity;
+import hamit.demir.model.entity.*;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.util.List;
@@ -13,7 +11,6 @@ public class MasaRepositoryCustomImpl extends QuerydslRepositorySupport implemen
     public MasaRepositoryCustomImpl() {
         super(MasaEntity.class);
     }
-
     @Override
     public List<MasaResponse> fetchAllMasalar() {
         QMasaEntity root = QMasaEntity.masaEntity;
@@ -41,7 +38,6 @@ public class MasaRepositoryCustomImpl extends QuerydslRepositorySupport implemen
                 root.guncelemeTarih
         )).where(root.id.eq(id)).fetchOne();
     }
-
     @Override
     public List<MasaResponse> fetchMasaByNotRezervasyon() {
         QMasaEntity root = QMasaEntity.masaEntity;

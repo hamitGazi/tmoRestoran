@@ -12,15 +12,9 @@ import java.util.List;
 public interface TatilGunRepositoryCustom {
 
 
-    List<CalismaZamanResponse> fetchAllCalismaZamanlar();
 
 
 
-    CalismaZamanResponse fetchCalismaZamanById(Long id);
-
-    CalismaZamanEntity fetchGecerliCalismaZaman(CalismaGunEnum gun);
-
-    List<CalismaZamanResponse> fetchAktifIstisnaZaman();
 
     List<TatilGunResponse> fetchAllTatilGunleri();
 
@@ -30,5 +24,5 @@ public interface TatilGunRepositoryCustom {
 
     TatilGunEntity fetchGecerliTatil(LocalDate date);
 
-    TatilGunEntity fetchGecerliTatil(LocalDate date);
+
 }

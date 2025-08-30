@@ -26,7 +26,6 @@ public class MasaEntity {
      * Masanın kaç kişilik olduğu.
      */
     @Column(name = "kapasite", nullable = false)
-
     private Integer kapasite;
 
     @Enumerated(EnumType.STRING)

@@ -12,9 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 
 public enum MasaDurumu {
-    AKTIF("Aktif"),
+    BOS("Boş"),
     REZERVE("Rezerve"),
-    KAPALI("Kapalı");
+    DOLU("Dolu"),
+    KAPALI("Kapalı"),
+    KONTROL_BEKLIYOR("Kontrol Bekliyor");
 
     private final String label;
 

@@ -15,7 +15,6 @@ public class TatilGunRepositoryCustomImpl extends QuerydslRepositorySupport impl
     }
 
 
-
     @Override
     public List<TatilGunResponse> fetchAllTatilGunleri() {
         QTatilGunEntity root = QTatilGunEntity.tatilGunEntity;
@@ -80,3 +79,4 @@ public class TatilGunRepositoryCustomImpl extends QuerydslRepositorySupport impl
                 .where(root.tarih.eq(date).and(root.aktif.eq(true)))
                 .fetchOne();
     }
+}
