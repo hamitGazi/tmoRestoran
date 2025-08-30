@@ -7,6 +7,8 @@ import hamit.demir.model.dto.rezervasyon.RezervasyonDeleteRequest;
 import hamit.demir.model.dto.rezervasyon.RezervasyonResponse;
 import hamit.demir.model.dto.rezervasyon.RezervasyonSaveRequest;
 import hamit.demir.model.dto.rezervasyon.RezervasyonUpdateRequest;
+import jakarta.transaction.Transactional;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
 
@@ -22,4 +24,10 @@ public interface RezervasyonService {
     Long updateRezervasyon(RezervasyonUpdateRequest request);
 
     String deleteRezervasyon(RezervasyonDeleteRequest request);
+
+
+
+
+    @Scheduled(fixedRate = 60000)
+    void kontrolRezervasyonScheduler();
 }

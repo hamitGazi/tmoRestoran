@@ -138,7 +138,7 @@ public class SiparisKalemRepositoryCustomImpl extends QuerydslRepositorySupport 
                         root.ekOzellikler,
                         siparis.siparisDurumu,
                         root.kalemNot
-                )).where(masa.id.eq(id).and(masa.masaDurum.eq(MasaDurumu.AKTIF))).fetch();
+                )).where(masa.id.eq(id).and(masa.masaDurum.eq(MasaDurumu.BOS))).fetch();
         return fetch;
     }
 }

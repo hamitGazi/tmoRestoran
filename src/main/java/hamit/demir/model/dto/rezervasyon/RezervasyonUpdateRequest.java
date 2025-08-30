@@ -1,5 +1,6 @@
 package hamit.demir.model.dto.rezervasyon;
 
+import hamit.demir.model.entity.EtkinlikTipEnum;
 import hamit.demir.model.entity.RezervasyonDurum;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,8 @@ public record RezervasyonUpdateRequest(
         @NotNull Long masaId,
         @NotNull LocalDateTime rezervasyonZamani,
         @NotNull @Min(1) Integer kisiSayisi,
-        @NotNull RezervasyonDurum durum
+        RezervasyonDurum durum,
+        @Min(30) Integer rezervasyonSuresi,
+        EtkinlikTipEnum etkinlikTip
 ) {
 }

@@ -27,7 +27,7 @@ public class SiparisEntity {
     @Column(name = "musteri_adi")
     private String musteriAd;
 
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "siparis",orphanRemoval = true)
+    @OneToOne(mappedBy = "siparis",orphanRemoval = true)
     private OdemeEntity odeme;
 
     @Column(name = "toplam_tutar")

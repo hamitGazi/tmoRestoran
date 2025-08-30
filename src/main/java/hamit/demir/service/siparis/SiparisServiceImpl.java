@@ -13,14 +13,11 @@ import hamit.demir.repository.odeme.OdemeRepository;
 import hamit.demir.repository.personel.PersonelRepository;
 import hamit.demir.repository.siparis.SiparisRepository;
 import hamit.demir.repository.siparisKalemi.SiparisKalemRepository;
-import hamit.demir.repository.stokKalem.StokKalemRepository;
 import hamit.demir.service.stokKalemi.StokKalemService;
 import hamit.demir.utils.BaseException;
 import hamit.demir.utils.GenericResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 

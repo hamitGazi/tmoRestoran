@@ -14,7 +14,9 @@ import java.util.List;
 public enum RezervasyonDurum {
     ONAYLANDI("Onaylandı"),
     IPTAL("İptal Edildi"),
-    BEKLEMEDE("Beklemede");
+    BEKLEMEDE("Beklemede"),
+    TAMAMLANDI("Tamamlandı"),
+    SURESI_DOLDU("Süresi Doldu");
 
 
     private final String label;
